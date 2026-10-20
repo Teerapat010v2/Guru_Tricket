@@ -433,7 +433,7 @@ function setHomeTab(k) { homeTab = k; renderAll(); }
 function workSection(u) {
   const tabsData = workTabs(u);
   const cur = tabsData.find(t => t.k === homeTab) || tabsData.find(t => t.arr.length) || tabsData[0];
-  return `<div class="tbar">${textTabs(tabsData.map(t => [t.k, t.l, t.arr.length]), cur.k, 'setHomeTab')}<span class="sp"></span>${densityBtn()}</div>
+  return `<div class="tbar">${textTabs(tabsData.map(t => [t.k, t.l, t.arr.length]), cur.k, 'setHomeTab')}</div>
     ${cur.arr.length ? list(cur.arr, { quick: true }) : empty(`ไม่มีงาน "${cur.l}"`)}`;
 }
 function homeTech(u) {

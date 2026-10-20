@@ -85,9 +85,10 @@ a{color:var(--primary)}
 
 /* แท็บข้อความ + ไอคอนเครื่องมือ */
 .tbar{display:flex;align-items:center;gap:4px;margin:4px 0 12px}
-.ttabs{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;padding:2px 0}
+.ttabs{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;padding:2px 24px 2px 0;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent)}
 .ttabs::-webkit-scrollbar{display:none}
-.ttabs button{flex:none;border:0;background:none;padding:6px 0;font:inherit;font-size:15.5px;color:var(--text-3);cursor:pointer;white-space:nowrap;position:relative}
+.ttabs button{flex:none;border:0;background:none;padding:6px 0;font:inherit;font-size:15px;color:var(--text-3);cursor:pointer;white-space:nowrap;position:relative}
 .ttabs button sup{font-size:11px;margin-left:2px;vertical-align:super;color:inherit}
 .ttabs button.on{color:var(--text);font-weight:500}
 .ttabs button.on::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2.5px;border-radius:2px;background:var(--primary)}
@@ -176,7 +177,7 @@ a{color:var(--primary)}
 .srow:not(.static):hover{background:var(--card-2)}
 .srow+.srow,.theme-pick+.srow{border-top:1px solid var(--line)}
 .srow>i{color:var(--text-2)}
-.srow>span{flex:1}
+.srow>span:not(.switch){flex:1}
 .srow small{display:block;font-size:12.5px;color:var(--text-2)}
 .srow>svg{color:var(--text-3)}
 .srow.static{cursor:default;padding-bottom:4px;min-height:auto}
@@ -554,8 +555,8 @@ label.fl+.voicebox{margin-top:6px}
    ========================================================= */
 @media (min-width:960px){
   body{background:var(--bg)}
-  .shell{max-width:none;margin:0;display:grid;grid-template-columns:232px minmax(0,1fr)}
-  .tabbar{position:relative;grid-column:1;flex-direction:column;justify-content:flex-start;gap:2px;padding:24px 12px;background:var(--surface);border-top:0;border-right:1px solid var(--line);overflow-y:auto;z-index:5}
+  .shell{max-width:none;margin:0;display:grid;grid-template-columns:232px minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+  .tabbar{position:relative;grid-row:1;grid-column:1;flex-direction:column;justify-content:flex-start;gap:2px;padding:24px 12px;background:var(--surface);border-top:0;border-right:1px solid var(--line);overflow-y:auto;z-index:5}
   :root[data-theme=light] .tabbar{background:var(--card)}
   .side-brand{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin:0 10px 26px}
   .side-brand img{width:130px;height:auto;border-radius:6px}
@@ -565,7 +566,7 @@ label.fl+.voicebox{margin-top:6px}
   .tab:hover{background:var(--card-2);color:var(--text)}
   .tab.on{background:var(--primary-s);color:var(--primary);font-weight:500}
   .tab:last-child{margin-top:auto}
-  .scroll{grid-column:2;padding:0 32px 64px}
+  .scroll{grid-row:1;grid-column:2;padding:0 32px 64px}
   .page{max-width:1080px;margin:0 auto}
   .phead{padding-top:30px;padding-bottom:18px}
   .ph-t h1{font-size:30px}
