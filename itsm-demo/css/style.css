@@ -166,6 +166,47 @@ a{color:var(--primary)}
 .tab.on{color:var(--primary)}
 .tab .bdg{position:absolute;top:-4px;right:-10px;background:#D93A1A;color:#fff;font-size:10px;font-weight:600;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-style:normal}
 
+/* รูปโปรไฟล์ (รูปจริง หรืออักษรตัวแรก) */
+.av{border-radius:50%;flex:none;object-fit:cover;display:inline-flex;align-items:center;justify-content:center;background:var(--primary-s);color:var(--primary);font-weight:600;line-height:1}
+.profile-card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.profile-card .tk-title{margin:8px 0 0}
+.opt .av{margin-right:-2px}
+
+/* ไอคอนงาน: รูปที่ลูกค้าถ่าย หรือไอคอนหมวดงานบนพื้นสีอ่อน (โทนหม่น ไม่ฉูดฉาด) */
+.tc-ic.photo{padding:0;overflow:hidden;background:var(--card-2)}
+.tc-ic.photo img{width:100%;height:100%;object-fit:cover}
+.tcard .tc-ic{width:44px;height:44px;border-radius:12px}
+.cat-printer{--cat:#3B6FB6}.cat-network{--cat:#2F8F83}.cat-account{--cat:#8A6A2E}.cat-install{--cat:#5B5FB0}.cat-repair{--cat:#A2593A}.cat-cctv{--cat:#6B5A8E}.cat-other{--cat:#5F6875}
+:root[data-theme=dark] :is(.cat-printer,.cat-network,.cat-account,.cat-install,.cat-repair,.cat-cctv,.cat-other){--cat:#9DB8E0}
+.tc-ic[class*=cat-]{color:var(--cat);background:color-mix(in srgb,var(--cat) 12%,var(--card))}
+
+/* ความคืบหน้าโปรเจกต์ */
+.pbar{height:6px;border-radius:3px;background:var(--card-2);overflow:hidden;margin:12px 0 0}
+.pbar i{display:block;height:100%;background:var(--primary);border-radius:3px;transition:width .3s}
+.pct{font-size:15px;font-weight:600;color:var(--primary);white-space:nowrap}
+.pct.big{font-size:20px}
+.task{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:14.5px;cursor:pointer;min-height:44px}
+.task+.task{border-top:1px solid var(--line)}
+.task input{width:22px;height:22px;margin:0;accent-color:var(--primary);flex:none}
+.task.done span{color:var(--text-2);text-decoration:line-through}
+.tc-f-wide{margin-left:56px}
+
+/* GPS: ระยะทาง + เวลาถึงโดยประมาณ */
+.eta{display:flex;align-items:center;gap:10px;margin:-2px 0 12px;padding:10px 12px;border-radius:12px;background:var(--primary-s);color:var(--primary)}
+.eta b{font-size:15px;font-weight:600}
+
+/* การแจ้งเตือน */
+.ibtn.bell{position:relative}
+.ibtn.bell .tbdg{top:2px;right:2px}
+button.trow{width:100%;border:0;background:none;font:inherit;text-align:left}
+.trow.unread .tr-m b{font-weight:600}
+
+/* ล็อกอิน / โน้ต */
+.demo-acc{margin-top:22px}
+.demo-acc summary{font-size:14px}
+.demo-acc .srow{padding:10px 4px}
+.note-txt{white-space:pre-wrap!important;overflow:visible!important;font-weight:400!important}
+
 /* สมัครใช้งานจากลิงก์ชวน + คำขอรออนุมัติ */
 .join{max-width:440px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 28px) 0 40px}
 .join h1{margin:0;font-size:26px;font-weight:500}

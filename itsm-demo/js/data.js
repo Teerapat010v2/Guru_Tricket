@@ -5,30 +5,33 @@ const YEAR = new Date().getFullYear();
 
 const users = {
   /* approver = ตัวแทน/หัวหน้าของบริษัทลูกค้า ผู้อนุมัติพนักงานที่สมัครเข้ามา */
-  cust1:  { id: 'cust1',  name: 'สมหญิง',   role: 'customer',    customer: 'C1', approver: true },
-  cust2:  { id: 'cust2',  name: 'วรรณา',    role: 'customer',    customer: 'C2', approver: true },
-  tech1:  { id: 'tech1',  name: 'ชาติชาย',  role: 'technician',  team: 'T1' },
-  tech2:  { id: 'tech2',  name: 'วิภา',     role: 'technician',  team: 'T1' },
-  lead1:  { id: 'lead1',  name: 'ประภาส',   role: 'team_leader', team: 'T1' },
-  admin1: { id: 'admin1', name: 'แอดมินระบบ', role: 'admin' },
+  /* skills = หมวดงานที่ช่างถนัด (ใช้แนะนำช่างตอนมอบหมาย) · phone = ใช้เข้าสู่ระบบ */
+  cust1:  { id: 'cust1',  name: 'สมหญิง',   role: 'customer',    customer: 'C1', approver: true, phone: '0810000001' },
+  cust2:  { id: 'cust2',  name: 'วรรณา',    role: 'customer',    customer: 'C2', approver: true, phone: '0810000002' },
+  tech1:  { id: 'tech1',  name: 'ชาติชาย',  role: 'technician',  team: 'T1', phone: '0820000001', skills: ['printer', 'repair', 'install'] },
+  tech2:  { id: 'tech2',  name: 'วิภา',     role: 'technician',  team: 'T1', phone: '0820000002', skills: ['account', 'network'] },
+  tech3:  { id: 'tech3',  name: 'สมชาย',    role: 'technician',  team: 'T1', phone: '0820000003', skills: ['cctv', 'network', 'install'] },
+  lead1:  { id: 'lead1',  name: 'ประภาส',   role: 'team_leader', team: 'T1', phone: '0830000001' },
+  admin1: { id: 'admin1', name: 'แอดมินระบบ', role: 'admin', phone: '0840000001' },
 };
+let nextTechNo = 4;
 
 /* พาร์ทเนอร์ (ลูกค้าองค์กร) → สถานที่ที่เราดูแล */
 const CONTRACT_LABEL = { ma: 'สัญญาดูแลรายปี (MA)', oncall: 'บริการรายครั้ง', project: 'งานโครงการ' };
 const customers = {
   C1: { id: 'C1', name: 'บริษัท เอบีซี จำกัด', contract: 'ma', contact: 'สมหญิง ใจดี', phone: '02-000-0001', email: 'it@abc.example',
     sites: [
-      { id: 'S1', name: 'สำนักงานใหญ่', address: '99/1 อาคารเอบีซี ถนนสุขุมวิท แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110', contact: 'สมหญิง ใจดี', phone: '02-000-0001' },
-      { id: 'S2', name: 'คลังสินค้าบางนา', address: '88 หมู่ 5 ถนนบางนา-ตราด กม.18 ตำบลบางโฉลง อำเภอบางพลี สมุทรปราการ 10540', contact: 'ธนพล (หัวหน้าคลัง)', phone: '02-000-0002' },
+      { id: 'S1', name: 'สำนักงานใหญ่', address: '99/1 อาคารเอบีซี ถนนสุขุมวิท แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110', contact: 'สมหญิง ใจดี', phone: '02-000-0001', lat: 13.7380, lng: 100.5600 },
+      { id: 'S2', name: 'คลังสินค้าบางนา', address: '88 หมู่ 5 ถนนบางนา-ตราด กม.18 ตำบลบางโฉลง อำเภอบางพลี สมุทรปราการ 10540', contact: 'ธนพล (หัวหน้าคลัง)', phone: '02-000-0002', lat: 13.6330, lng: 100.7230 },
     ] },
   C2: { id: 'C2', name: 'ร้านสะดวกซื้อ XYZ', contract: 'oncall', contact: 'วรรณา ศรีสุข', phone: '02-000-0101', email: 'admin@xyz.example',
     sites: [
-      { id: 'S3', name: 'สาขาลาดพร้าว', address: '1234 ถนนลาดพร้าว แขวงจอมพล เขตจตุจักร กรุงเทพฯ 10900', contact: 'วรรณา ศรีสุข', phone: '02-000-0101' },
-      { id: 'S4', name: 'สาขารัชดา', address: '55 ถนนรัชดาภิเษก แขวงดินแดง เขตดินแดง กรุงเทพฯ 10400', contact: 'ผู้จัดการสาขา', phone: '02-000-0102' },
+      { id: 'S3', name: 'สาขาลาดพร้าว', address: '1234 ถนนลาดพร้าว แขวงจอมพล เขตจตุจักร กรุงเทพฯ 10900', contact: 'วรรณา ศรีสุข', phone: '02-000-0101', lat: 13.8160, lng: 100.5610 },
+      { id: 'S4', name: 'สาขารัชดา', address: '55 ถนนรัชดาภิเษก แขวงดินแดง เขตดินแดง กรุงเทพฯ 10400', contact: 'ผู้จัดการสาขา', phone: '02-000-0102', lat: 13.7660, lng: 100.5700 },
     ] },
   C3: { id: 'C3', name: 'คลินิกทันตกรรมยิ้มสวย', contract: 'project', contact: 'ทพ.อรุณี', phone: '02-000-0201', email: 'contact@smile.example',
     sites: [
-      { id: 'S5', name: 'คลินิกอารีย์', address: '7 ซอยอารีย์ 1 แขวงพญาไท เขตพญาไท กรุงเทพฯ 10400', contact: 'ทพ.อรุณี', phone: '02-000-0201' },
+      { id: 'S5', name: 'คลินิกอารีย์', address: '7 ซอยอารีย์ 1 แขวงพญาไท เขตพญาไท กรุงเทพฯ 10400', contact: 'ทพ.อรุณี', phone: '02-000-0201', lat: 13.7800, lng: 100.5450 },
     ] },
 };
 let nextCustomerNo = 4, nextSiteNo = 6;
@@ -59,7 +62,8 @@ const CATEGORIES = {
   account: { label: 'บัญชี/รหัสผ่าน', icon: 'key' },
   install: { label: 'ติดตั้งเครื่อง', icon: 'pc' },
   repair:  { label: 'ซ่อมอุปกรณ์', icon: 'tool' },
-  other:   { label: 'อื่น ๆ', icon: 'chat' },
+  cctv:    { label: 'กล้องวงจรปิด', icon: 'cctv' },
+  other:   { label: 'อื่น ๆ', icon: 'help' },
 };
 
 const ROLE_LABEL = { customer: 'ลูกค้า', technician: 'ช่างเทคนิค', team_leader: 'หัวหน้าทีม', admin: 'ผู้ดูแลระบบ' };
@@ -165,6 +169,22 @@ let nextPhotoNo = 1;
 const RATE_LABEL = ['', 'ต้องปรับปรุง', 'พอใช้', 'ปานกลาง', 'ดี', 'ดีมาก'];
 let nextTicketNo = 1005;
 
+/* โปรเจกต์ (งานติดตั้งหลายขั้นตอน) — ความคืบหน้า = งานย่อยที่เสร็จ / ทั้งหมด */
+let projects = [
+  { id: 'PJ1', name: 'ติดตั้งกล้องวงจรปิด 16 จุด', category: 'cctv', customer: 'C1', siteId: 'S2', owner: 'tech3', due: t(10 * DAY), createdAt: t(-6 * DAY),
+    tasks: [{ text: 'สำรวจหน้างานและวางตำแหน่งกล้อง', done: true }, { text: 'เดินสาย LAN / ไฟ', done: true }, { text: 'ติดตั้งกล้อง 16 ตัว', done: false }, { text: 'ตั้งค่า NVR และแอปดูภาพ', done: false }, { text: 'ส่งมอบและสอนใช้งาน', done: false }] },
+  { id: 'PJ2', name: 'ติดตั้ง Wi-Fi ทั้งสาขา', category: 'network', customer: 'C2', siteId: 'S4', owner: 'tech2', due: t(4 * DAY), createdAt: t(-3 * DAY),
+    tasks: [{ text: 'สำรวจสัญญาณ', done: true }, { text: 'ติดตั้ง Access Point 4 ตัว', done: true }, { text: 'ทดสอบสัญญาณทุกจุด', done: true }, { text: 'ส่งมอบ', done: false }] },
+];
+let nextProjectNo = 3;
+
+/* การแจ้งเตือน: ส่งถึงผู้ใช้แต่ละคน (to) — แสดงในกระดิ่ง + แจ้งเตือนของเครื่องเมื่อคนนั้นเปิดแอป */
+let notifs = [
+  { id: 'N1', to: 'lead1', title: 'งานใหม่ · ด่วนมาก', body: 'เครือข่ายล่มทั้งสาขา — ร้านสะดวกซื้อ XYZ', ticketId: 'T-1003', at: t(-15), read: false },
+  { id: 'N2', to: 'admin1', title: 'งานใหม่ · ด่วนมาก', body: 'เครือข่ายล่มทั้งสาขา — ร้านสะดวกซื้อ XYZ', ticketId: 'T-1003', at: t(-15), read: false },
+];
+let nextNotifNo = 3;
+
 /* คำขอสมัครใช้งานจากลิงก์ชวน (?join=รหัสบริษัท) — รอตัวแทนบริษัทอนุมัติ */
 let joinRequests = [];
 let nextJoinNo = 1, nextUserNo = 1;
@@ -172,7 +192,7 @@ let nextReportNo = 4;
 
 let missions = {
   M1: { id: 'M1', ticketId: 'T-1001', technician: 'tech1', status: 'assigned',
-        dest: 'สำนักงานใหญ่ ชั้น 3', destXY: [78, 30], posXY: [18, 70], session: null },
+        dest: 'สำนักงานใหญ่ ชั้น 3', siteId: 'S1', startLL: [13.7000, 100.5230], posLL: [13.7000, 100.5230], session: null },
 };
 
 let auditLog = [
@@ -185,4 +205,5 @@ function logAudit(u, action, detail) { auditLog.unshift({ at: new Date(), actor:
 const custName = id => customers[id]?.name || '-';
 const siteOf = tk => customers[tk.customer]?.sites.find(s => s.id === tk.siteId);
 const siteLabel = tk => { const s = siteOf(tk); return (s ? s.name : '-') + (tk.location ? ` · ${tk.location}` : ''); };
+const siteById = id => allSites().find(s => s.id === id);
 const allSites = () => Object.values(customers).flatMap(c => c.sites.map(s => ({ ...s, customer: c.id })));

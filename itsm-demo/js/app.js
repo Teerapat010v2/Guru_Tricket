@@ -23,17 +23,12 @@ const IC = {
   pin: '<path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
   shield: '<path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
-  tool: '<path d="M14.7 6.3a4 4 0 005 5L21 13l-8 8-4-4 8-8zM3 21l5-5"/>',
-  print: '<path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M7 14h10v7H7z"/>',
-  key: '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',
-  wifi: '<path d="M2 9a15 15 0 0120 0M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0"/><circle cx="12" cy="19" r=".6"/>',
   chat: '<path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/>',
   back: '<path d="M15 5l-7 7 7 7"/>',
   right: '<path d="M9 5l7 7-7 7"/>',
   chev: '<path d="M6 9l6 6 6-6"/>',
   send: '<path d="M4 12l16-8-6 16-3-7z"/>',
   lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
-  pc: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 21h8M12 16v5"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/>',
   me: '<circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8.5 14.5a4.5 4.5 0 007 0"/>',
@@ -59,6 +54,21 @@ const IC = {
   palette: '<path d="M12 3a9 9 0 100 18c1.1 0 1.6-.9 1.2-1.8-.5-1 .2-2.2 1.3-2.2H17a4 4 0 004-4c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   moon: '<path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/>',
+  /* ไอคอนหมวดงาน (วาดใหม่ให้เรียบ เส้นเท่ากัน) */
+  print: '<path d="M7 8V4h10v4"/><rect x="3.5" y="8" width="17" height="8.5" rx="2.5"/><path d="M7 14h10v6H7z"/><path d="M16.5 11h.01"/>',
+  wifi: '<path d="M2.5 9.5a14 14 0 0119 0"/><path d="M5.5 13a9.5 9.5 0 0113 0"/><path d="M8.7 16.3a5 5 0 016.6 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/>',
+  key: '<circle cx="8" cy="15.5" r="4"/><path d="M11 12.5L19.5 4"/><path d="M16 7.5l2.5 2.5M18.5 5l2 2"/>',
+  pc: '<rect x="3" y="4" width="18" height="12" rx="2.5"/><path d="M9 20h6M12 16v4"/>',
+  tool: '<path d="M14.5 5.5a4 4 0 005 5l-9.3 9.3a2.1 2.1 0 01-3-3z"/><path d="M14.5 5.5L17 3l4 4-2.5 2.5"/>',
+  cctv: '<path d="M3.5 7.5l13-3.5 2 6.5-13 3.5z"/><path d="M8.5 13l1.2 4H4v3"/><path d="M18.5 9.5l2.5-.7"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-.9.6-1.5 1.1-1.5 2.2"/><circle cx="12" cy="17" r=".6" fill="currentColor"/>',
+  folder: '<path d="M3.5 7a2 2 0 012-2H10l2 2.5h6.5a2 2 0 012 2V17a2 2 0 01-2 2h-13a2 2 0 01-2-2z"/>',
+  bell: '<path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 004 0"/>',
+  note: '<path d="M5 4h10l4 4v12H5z"/><path d="M15 4v4h4M8.5 12h7M8.5 16h5"/>',
+  trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  nav: '<path d="M3 11l18-8-8 18-2-8z"/>',
+  phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>',
+  logout: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',
   rows: '<path d="M4 7h16M4 12h16M4 17h16"/>',
   cards: '<rect x="3.5" y="4" width="17" height="7" rx="2"/><rect x="3.5" y="13" width="17" height="7" rx="2"/>',
   fold: '<path d="M7 9l5-5 5 5M7 15l5 5 5-5"/>',
@@ -72,7 +82,8 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* โหมดส่วนตัว */ } },
 };
 
-let currentUser = users.lead1;
+let currentUser = users[store.get('gitsd-session', null)] || null;   // null = ยังไม่เข้าสู่ระบบ → หน้าล็อกอิน
+if (currentUser?.removed) currentUser = null;
 let sheetStack = [];          // [{t:'ticket'|'partner', id}]
 let tab = 'home';
 let filter = 'all';
@@ -233,36 +244,41 @@ function openRolePicker() {
   openModal(`<div class="mh"><h3>เลือกบทบาทที่ต้องการทดลอง</h3>${xbtn()}</div>
   <p class="hint" style="margin:0 0 12px">แต่ละบทบาทเห็นหน้าจอ เมนู และปุ่มต่างกันตามสิทธิ์</p>
   ${ROLE_ORDER.map(r => { const meta = ROLE_META[r];
-    const people = Object.values(users).filter(x => x.role === r);
+    const people = Object.values(users).filter(x => x.role === r && !x.removed);
     return `<div class="rp">
       <div class="rp-head"><i>${ic(meta.icon, 20)}</i><div><b>${ROLE_LABEL[r]}</b><small>${meta.goal}</small></div></div>
       <ul class="rp-can">${meta.can.map(c => `<li>${ic('check', 13, 2.6)}${c}</li>`).join('')}${meta.cannot.map(c => `<li class="no">${ic('x', 13, 2.6)}${c}</li>`).join('')}</ul>
-      <div class="rp-people">${people.map(p => `<button class="rp-btn ${p.id === currentUser.id ? 'on' : ''}" onclick="switchUser('${p.id}')">${esc(p.name)}${p.customer ? ` <small>· ${esc(custName(p.customer))}</small>` : ''}${p.id === currentUser.id ? ' ✓' : ''}</button>`).join('')}</div>
+      <div class="rp-people">${people.map(p => `<button class="rp-btn ${p.id === currentUser?.id ? 'on' : ''}" onclick="switchUser('${p.id}')">${esc(p.name)}${p.customer ? ` <small>· ${esc(custName(p.customer))}</small>` : ''}${p.id === currentUser?.id ? ' ✓' : ''}</button>`).join('')}</div>
     </div>`; }).join('')}`);
 }
 function switchUser(id) {
+  if (!users[id]) return;
   currentUser = users[id]; filter = 'all'; homeTab = null; query = ''; showSearch = false; tab = 'home'; rpt.partner = 'all';
   draft = { desc: '', urgent: false, site: '' }; cmtDraft = '';
   Object.keys(pending).forEach(clearPending);
+  store.set('gitsd-session', id);
   closeModal(); closeDoc(); closeLightbox(); closeSheet(); renderAll(); $('screen').scrollTo(0, 0);
-  toast(`สลับเป็น ${ROLE_LABEL[currentUser.role]}: ${currentUser.name}`);
+  toast(`เข้าใช้งานในฐานะ ${ROLE_LABEL[currentUser.role]}: ${currentUser.name}`);
+  deliverNotifs();
 }
+function logout() { currentUser = null; store.set('gitsd-session', null); closeModal(); closeSheet(); renderAll(); }
 
 /* ---------- เมนู (มือถือ = แถบล่าง, คอมพิวเตอร์ = แถบซ้าย) — สูงสุด 5 ช่อง ---------- */
 function tabsFor(u) {
   const me = { id: 'me', label: 'ฉัน', icon: 'me' };
   if (u.role === 'customer') return [{ id: 'home', label: 'หน้าหลัก', icon: 'home' }, { id: 'tickets', label: 'งานของฉัน', icon: 'list' }, me];
-  if (u.role === 'technician') return [{ id: 'home', label: 'หน้าหลัก', icon: 'home' }, { id: 'tickets', label: 'งาน', icon: 'list' }, { id: 'mission', label: 'ภารกิจ', icon: 'pin' }, me];
-  const t = [{ id: 'home', label: 'หน้าหลัก', icon: 'home' }, { id: 'tickets', label: 'งาน', icon: 'list' }];
-  if (canSeePartners(u)) t.push({ id: 'partners', label: 'พาร์ทเนอร์', icon: 'building' });
-  if (canSeeSummaryReport(u)) t.push({ id: 'reports', label: 'รายงาน', icon: 'chart' });
-  return [...t, me];
+  const projectsTab = { id: 'projects', label: 'โปรเจกต์', icon: 'folder' };
+  if (u.role === 'technician') return [{ id: 'home', label: 'หน้าหลัก', icon: 'home' }, { id: 'tickets', label: 'งาน', icon: 'list' }, { id: 'mission', label: 'ภารกิจ', icon: 'pin' }, projectsTab, me];
+  return [{ id: 'home', label: 'หน้าหลัก', icon: 'home' }, { id: 'tickets', label: 'งาน', icon: 'list' }, projectsTab, { id: 'team', label: 'ทีมช่าง', icon: 'team' }, me];
 }
-/* หน้าที่เข้าถึงได้แต่ไม่อยู่ในเมนูหลัก (เปิดจากทางลัด / หน้า "ฉัน") */
+/* หน้าที่เข้าถึงได้แต่ไม่อยู่ในเมนูหลัก (เปิดจากทางลัดหน้าหลัก / หน้า "ฉัน") */
 function screensFor(u) {
   const s = new Set(tabsFor(u).map(t => t.id));
   if (canSeeMissions(u)) s.add('mission');
   if (canManageUsers(u)) s.add('users');
+  if (canSeePartners(u)) s.add('partners');
+  if (canSeeSummaryReport(u)) s.add('reports');
+  if (u.role === 'customer') s.add('projects');
   return s;
 }
 function tabBadge(u, id) {
@@ -341,7 +357,7 @@ function custStatus(tk) {
   if (tk.status === 'resolved') return { icon: 'pen', t: 'งานเสร็จแล้ว — รอคุณเซ็นรับ', d: 'ตรวจสอบผลงานแล้วเซ็นรับได้เลย' };
   if (tk.status === 'closed') return { icon: 'check', t: 'เสร็จเรียบร้อย', d: 'ขอบคุณที่ใช้บริการ' };
   if (tk.status === 'pending') return { icon: 'pause', t: 'พักงานชั่วคราว', d: tk.history.filter(h => h.to === 'pending').at(-1)?.reason || 'ทีมงานจะแจ้งความคืบหน้า' };
-  if (ms === 'en_route') return { icon: 'car', t: `${tech}กำลังเดินทางไปหาคุณ`, d: 'ช่างจะถึงในไม่ช้า' };
+  if (ms === 'en_route') return { icon: 'car', t: `${tech}กำลังเดินทางไปหาคุณ`, d: etaText(eta(m)) || 'ช่างจะถึงในไม่ช้า' };
   if (ms === 'arrived' || ms === 'working') return { icon: 'tool', t: `${tech}อยู่ที่หน้างานแล้ว`, d: 'กำลังตรวจสอบและแก้ไข' };
   if (tk.status === 'assigned') return { icon: 'user', t: `${tech}รับงานแล้ว`, d: 'จะเริ่มดำเนินการเร็ว ๆ นี้' };
   return { icon: 'tool', t: `${tech}กำลังแก้ไข`, d: 'เราจะแจ้งทันทีเมื่อเสร็จ' };
@@ -352,10 +368,13 @@ const xbtn = () => `<button class="xbtn" onclick="closeModal()" aria-label="ป�
 const ibtn = (icon, label, fn, pressed) => `<button class="ibtn ${pressed ? 'on' : ''}" onclick="${fn}" title="${label}" aria-label="${label}" ${pressed != null ? `aria-pressed="${!!pressed}"` : ''}>${ic(icon, 22, 1.7)}</button>`;
 const demoBtn = () => `<button class="ibtn demo" onclick="openRolePicker()" title="สลับบทบาท (โหมดสาธิต)" aria-label="สลับบทบาท (โหมดสาธิต)">${ic('swap', 20, 1.8)}<span>DEMO</span></button>`;
 function pageHead(title, sub = '', actions = '', opt = {}) {
+  /* หน้าที่ไม่อยู่ในเมนูหลัก (เปิดจากทางลัด) มีปุ่มกลับหน้าหลักให้เอง */
+  const back = opt.back !== undefined ? opt.back : (tab !== 'home' && !tabsFor(currentUser).some(x => x.id === tab) ? 'home' : null);
+  const unread = myNotifs().filter(n => !n.read).length;
   return `<header class="phead">
-    ${opt.back ? `<button class="ibtn back" onclick="goTab('${opt.back}')" aria-label="กลับ">${ic('back', 22, 2)}</button>` : ''}
+    ${back ? `<button class="ibtn back" onclick="goTab('${back}')" aria-label="กลับ">${ic('back', 22, 2)}</button>` : ''}
     <div class="ph-t">${opt.logo ? '<img class="ph-logo" src="img/logo.png" alt="Guru IT Solution" width="96" height="28">' : ''}<h1>${title}</h1>${sub ? `<small>${esc(sub)}</small>` : ''}</div>
-    <div class="ph-a">${actions}${demoBtn()}</div></header>`;
+    <div class="ph-a">${actions}<button class="ibtn bell" onclick="openNotifs()" title="การแจ้งเตือน" aria-label="การแจ้งเตือน${unread ? ` ยังไม่อ่าน ${unread}` : ''}">${ic('bell', 22, 1.7)}${unread ? `<b class="tbdg">${unread}</b>` : ''}</button>${demoBtn()}</div></header>`;
 }
 const tiles = items => `<div class="tiles">${items.filter(Boolean).map(t => `<button class="tile" onclick="${t.fn}"><i>${ic(t.icon, 26, 1.7)}${t.badge ? `<b class="tbdg">${t.badge}</b>` : ''}</i><span>${t.label}</span>${t.sub ? `<small>${t.sub}</small>` : ''}</button>`).join('')}</div>`;
 function textTabs(items, cur, setter) {
@@ -363,7 +382,13 @@ function textTabs(items, cur, setter) {
 }
 const densityBtn = () => ibtn(dense ? 'cards' : 'rows', dense ? 'ขยายรายการ (แสดงรายละเอียด)' : 'ย่อรายการ (แสดงแบบสั้น)', `setDense(${!dense})`);
 const empty = (msg, icon = 'check') => `<div class="empty">${ic(icon, 30, 1.5)}<div>${msg}</div></div>`;
-const statusIcon = { new: 'inbox', assigned: 'user', in_progress: 'tool', pending: 'pause', resolved: 'pen', closed: 'check' };
+/* ไอคอนงาน: รูปที่ลูกค้าถ่ายมา (ถ้ามี) ไม่งั้นใช้ไอคอนตามหมวดงาน */
+const catOf = tk => CATEGORIES[tk.category] ? tk.category : 'other';
+function ticketIcon(tk) {
+  const p = tk.photos?.find(id => PHOTOS[id]);
+  return p ? `<i class="tc-ic photo"><img src="${PHOTOS[p]}" alt="รูปปัญหาที่ลูกค้าถ่าย" loading="lazy"></i>`
+    : `<i class="tc-ic cat-${catOf(tk)}" title="${CATEGORIES[catOf(tk)].label}">${ic(CATEGORIES[catOf(tk)].icon, 22, 1.7)}</i>`;
+}
 
 function custProgress(tk) {
   const st = CUST_STAGE[tk.status];
@@ -384,13 +409,13 @@ function ticketCard(tk, opts = {}) {
   if (cust) {
     const cs = custStatus(tk);
     return `<div class="tcard ${tk.status === 'resolved' ? 'attn' : ''}" onclick="openTicket('${tk.id}')" role="button" tabindex="0">
-      <div class="tc-h"><i class="tc-ic st-${tk.status}">${ic(cs.icon, 20, 1.8)}</i><div class="tc-t"><b>${esc(tk.subject)}</b><small>${tk.id} · แจ้ง ${ago(tk.history[0].at)}</small></div></div>
+      <div class="tc-h">${ticketIcon(tk)}<div class="tc-t"><b>${esc(tk.subject)}</b><small>${tk.id} · แจ้ง ${ago(tk.history[0].at)}</small></div></div>
       <div class="tc-f"><span class="pill p-${tk.status}">${esc(cs.t)}</span>${tk.photos?.length ? `<span class="tag">${ic('camera', 13, 2)}${tk.photos.length}</span>` : ''}</div>
       ${qbtn}
     </div>`;
   }
   return `<div class="tcard" onclick="openTicket('${tk.id}')" role="button" tabindex="0">
-    <div class="tc-h"><i class="tc-ic st-${tk.status}">${ic(statusIcon[tk.status], 20, 1.8)}</i><div class="tc-t"><b>${esc(tk.subject)}</b><small>${tk.id} · ${esc(custName(tk.customer))}</small></div>
+    <div class="tc-h">${ticketIcon(tk)}<div class="tc-t"><b>${esc(tk.subject)}</b><small>${tk.id} · ${esc(custName(tk.customer))}</small></div>
       ${['urgent', 'high'].includes(tk.priority) ? `<span class="prio prio-${tk.priority}">${PRIORITY_LABEL[tk.priority]}</span>` : ''}</div>
     <div class="tc-f"><span class="pill p-${tk.status}">${STATUS_LABEL[tk.status]}</span>
       ${isManager(u) ? `<span class="tag ${tk.assignee ? '' : 'warn'}">${ic('user', 13, 2)}${tk.assignee ? esc(nameOf(tk.assignee)) : 'ยังไม่มอบหมาย'}</span>` : `<span class="tag">${esc(siteOf(tk)?.name || '-')}</span>`}
@@ -405,6 +430,7 @@ function homeCustomer(u) {
   const toSign = vis.filter(x => canSignOff(u, x));
   const open = vis.filter(isOpen);
   const toRate = vis.filter(x => canRate(u, x)).slice(0, 1);
+  const myProjects = projects.filter(p => canSeeProject(u, p) && pct(p) < 100);
   return pageHead(`สวัสดี คุณ${u.name}`, custName(u.customer), '', { logo: true })
   + tiles([
       { icon: 'pen', label: 'แจ้งปัญหา', fn: 'openCreate()' },
@@ -413,6 +439,7 @@ function homeCustomer(u) {
   + (pendingJoins(u).length ? fold('c-join', 'คำขอเข้าใช้งาน', `<div class="list dense">${pendingJoins(u).map(joinRow).join('')}</div>`, { count: pendingJoins(u).length, hot: true }) : '')
   + (toSign.length ? fold('c-sign', 'รอคุณเซ็นรับ', list(toSign, { quick: true }), { count: toSign.length, hot: true }) : '')
   + fold('c-open', 'กำลังดำเนินการ', open.length ? list(open) : empty('ไม่มีงานค้าง — ทุกอย่างเรียบร้อย'), { count: open.length })
+  + (myProjects.length ? fold('c-projects', 'โปรเจกต์ของบริษัท', `<div class="list">${myProjects.map(projCard).join('')}</div>`, { count: myProjects.length }) : '')
   + (toRate.length ? `<button class="mcard nudge" onclick="openRating('${toRate[0].id}')"><i>${ic('star', 22, 1.8)}</i><div><b>บริการครั้งล่าสุดเป็นอย่างไร?</b><small>${esc(toRate[0].subject)} — แตะเพื่อให้คะแนน</small></div>${ic('right', 18, 2)}</button>` : '');
 }
 
@@ -451,8 +478,8 @@ function homeLead(u) {
   return pageHead('หน้าหลัก', `${teams[u.team]} · ${u.name}`)
   + tiles([
       { icon: 'pin', label: 'ติดตามช่าง', fn: "goTab('mission')" },
-      { icon: 'chart', label: 'ผลงาน 7 วัน', sub: `${done7.length} งาน${avg ? ` · ★ ${num(avg)}` : ''}`, fn: "rpt.period='7';rpt.view='summary';goTab('reports')" },
-      { icon: 'shield', label: 'บันทึกตรวจสอบ', fn: "rpt.view='audit';goTab('reports')" }])
+      { icon: 'building', label: 'พาร์ทเนอร์', sub: `${allSites().length} สถานที่`, fn: "goTab('partners')" },
+      { icon: 'chart', label: 'ผลงาน 7 วัน', sub: `${done7.length} งาน${avg ? ` · ★ ${num(avg)}` : ''}`, fn: "rpt.period='7';rpt.view='summary';goTab('reports')" }])
   + workSection(u)
   + fold('l-load', 'ภาระงานของช่าง', `<div class="card">${techs.map(x => {
       const mine = tickets.filter(t => t.assignee === x.id && isOpen(t)), n = mine.length;
@@ -465,7 +492,7 @@ function homeAdmin(u) {
   + tiles([
       { icon: 'team', label: 'ผู้ใช้และสิทธิ์', sub: `${Object.keys(users).length} คน`, fn: "goTab('users')" },
       { icon: 'building', label: 'พาร์ทเนอร์', sub: `${allSites().length} สถานที่`, fn: "goTab('partners')" },
-      { icon: 'shield', label: 'บันทึกตรวจสอบ', fn: "rpt.view='audit';goTab('reports')" }])
+      { icon: 'chart', label: 'รายงาน', fn: "rpt.view='summary';goTab('reports')" }])
   + workSection(u)
   + fold('a-roles', 'ผู้ใช้ตามบทบาท', `<div class="rolegrid">${ROLE_ORDER.map(r => `<button class="rg" onclick="goTab('users')"><i>${ic(ROLE_META[r].icon, 20)}</i><b>${roleCount(r)}</b><span>${ROLE_LABEL[r]}</span></button>`).join('')}</div>`, { open: false })
   + fold('a-audit', 'เหตุการณ์ล่าสุด', `<div class="card">${auditRows(auditLog.slice(0, 5))}</div>`, { open: false, count: auditLog.length });
@@ -545,6 +572,7 @@ function submitJoin() {
   const err = !name ? 'กรุณากรอกชื่อ' : !validPhone(phone) ? 'เบอร์โทรไม่ถูกต้อง (เช่น 0812345678)' : taken ? 'เบอร์นี้ส่งคำขอแล้วหรือเป็นสมาชิกอยู่แล้ว' : '';
   if (err) { $('jErr').textContent = err; return; }
   joinRequests.push({ id: `J${nextJoinNo++}`, customer: joinCid, siteId, name, phone, photo: joinDraft.photo, at: new Date(), status: 'pending' });
+  notify([approverOf(joinCid)?.id], 'คำขอเข้าใช้งานใหม่', `${name} ขอเข้าใช้งานในนาม ${c.name}`, null, 'home');
   joinDone = true; renderAll();
 }
 function leaveJoin(uid) {
@@ -580,12 +608,299 @@ async function shareInvite() {
   } catch (e) { if (e.name !== 'AbortError') { $('invUrl').focus(); toast('กดค้างที่ลิงก์ด้านบนเพื่อคัดลอก'); } }
 }
 
+/* ---------- รูปโปรไฟล์: รูปจริง หรืออักษรตัวแรกของชื่อ (ข้ามสระหน้า เ แ โ ใ ไ) ---------- */
+const initialOf = name => [...String(name).trim()].find(c => !'เแโใไ'.includes(c)) || '?';
+const avatarHtml = (u, s = 40) => u?.photo && PHOTOS[u.photo]
+  ? `<img class="av" src="${PHOTOS[u.photo]}" alt="" width="${s}" height="${s}" style="width:${s}px;height:${s}px">`
+  : `<span class="av" aria-hidden="true" style="width:${s}px;height:${s}px;font-size:${Math.round(s * .42)}px">${esc(initialOf(u?.name || '?'))}</span>`;
+
+/* ---------- การแจ้งเตือน: กระดิ่งในแอป + เด้งเตือนของเครื่อง + เสียง ---------- */
+// shortcut: แจ้งเตือนเก็บในเบราว์เซอร์นี้ และเด้งเมื่อผู้รับเปิดแอป — ส่งถึงมือถือ/คอมที่ปิดแอปอยู่ต้องมี server + Web Push
+const myNotifs = () => currentUser ? notifs.filter(n => n.to === currentUser.id).sort((a, b) => b.at - a.at) : [];
+const dispatchers = () => Object.values(users).filter(u => isManager(u) && !u.removed).map(u => u.id);
+function notify(toIds, title, body, ticketId = null, go = null) {
+  const to = [...new Set(toIds)].filter(id => users[id] && !users[id].removed);
+  to.forEach(id => notifs.push({ id: `N${nextNotifNo++}`, to: id, title, body, ticketId, go, at: new Date(), read: false }));
+  if (currentUser && to.includes(currentUser.id)) deliverNotifs();
+}
+let audioCtx = null;
+function chime() {
+  try {
+    audioCtx ||= new (window.AudioContext || window.webkitAudioContext)();
+    [880, 1320].forEach((f, i) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t0 = audioCtx.currentTime + i * .18;
+      o.frequency.value = f; o.connect(g); g.connect(audioCtx.destination);
+      g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(.25, t0 + .02); g.gain.exponentialRampToValueAtTime(.0001, t0 + .35);
+      o.start(t0); o.stop(t0 + .4);
+    });
+  } catch { /* เบราว์เซอร์ไม่รองรับเสียง */ }
+}
+/* แสดงแจ้งเตือนที่ยังไม่เคยเด้งของผู้ใช้ปัจจุบัน: เสียง + แจ้งเตือนของเครื่อง (ถ้าอนุญาต) ไม่งั้นแถบข้อความ */
+function deliverNotifs() {
+  const fresh = myNotifs().filter(n => !n.read && !n.shown);
+  if (!fresh.length) return;
+  fresh.forEach(n => { n.shown = true; });
+  chime();
+  let shown = false;
+  if ('Notification' in window && Notification.permission === 'granted') {
+    try { fresh.slice(0, 3).forEach(n => { const x = new Notification(n.title, { body: n.body, icon: 'img/icon-192.png', tag: n.id }); x.onclick = () => { window.focus(); openNotif(n.id); }; }); shown = true; }
+    catch { /* มือถือบางรุ่นเด้งได้เฉพาะผ่าน service worker */ }
+  }
+  if (!shown) toast(`🔔 ${fresh[0].title} — ${fresh[0].body}`);
+}
+async function enableSystemNotifs() {
+  if (!('Notification' in window)) return toast('เบราว์เซอร์นี้ไม่รองรับการแจ้งเตือน');
+  const p = await Notification.requestPermission();
+  toast(p === 'granted' ? 'เปิดการแจ้งเตือนบนเครื่องนี้แล้ว' : 'ยังไม่ได้อนุญาตการแจ้งเตือน — เปิดได้ในการตั้งค่าเบราว์เซอร์');
+  if ($('modal').classList.contains('open')) openNotifs(); else renderAll();
+}
+function openNotifs() {
+  const list = myNotifs(), perm = 'Notification' in window ? Notification.permission : 'unsupported';
+  openModal(`<div class="mh"><h3>การแจ้งเตือน</h3>${xbtn()}</div>
+    ${perm === 'default' ? `<button class="mcard" onclick="enableSystemNotifs()"><i>${ic('bell', 22)}</i><div><b>เปิดการแจ้งเตือนบนเครื่องนี้</b><small>เด้งเตือนพร้อมเสียงเมื่อมีงานใหม่</small></div>${ic('right', 18, 2)}</button>` : ''}
+    ${list.length ? `<div class="list dense">${list.map(n => `<button class="trow ${n.read ? '' : 'unread'}" onclick="openNotif('${n.id}')"><span class="sdot ${n.read ? '' : 'd-new'}" aria-hidden="true"></span>
+      <div class="tr-m"><b>${esc(n.title)}</b><small>${esc(n.body)} · ${ago(n.at)}</small></div>${ic('right', 16, 2)}</button>`).join('')}</div>` : empty('ยังไม่มีการแจ้งเตือน', 'bell')}
+    ${list.some(n => !n.read) ? `<div class="row center"><button class="btn link" onclick="markAllRead()">อ่านแล้วทั้งหมด</button></div>` : ''}`);
+}
+function openNotif(id) {
+  const n = notifs.find(x => x.id === id && x.to === currentUser?.id); if (!n) return;
+  n.read = true; closeModal();
+  if (n.go) goTab(n.go); else renderAll();
+  if (n.ticketId) openTicket(n.ticketId);
+}
+function markAllRead() { myNotifs().forEach(n => { n.read = true; }); closeModal(); renderAll(); }
+
+/* ---------- เข้าสู่ระบบด้วยเบอร์โทร + OTP / สมัครด้วยรหัสบริษัท ---------- */
+// shortcut: OTP เป็นรหัสสาธิตตายตัว — ระบบจริงต้องส่ง SMS จาก server และจำกัดจำนวนครั้งที่ลอง
+const DEMO_OTP = '123456';
+let login = { phone: '', step: 'phone' };
+function renderLogin() {
+  const accounts = Object.values(users).filter(x => !x.removed);
+  return `<div class="join"><img class="ph-logo" src="img/logo.png" alt="Guru IT Solution" width="96" height="28">
+    <h1>เข้าสู่ระบบ</h1><p class="hint" style="margin:2px 0 0">Guru IT Service Desk</p>
+    ${login.step === 'phone' ? `
+      <label class="fl">เบอร์โทรที่ลงทะเบียน<input id="lgPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="15" placeholder="เช่น 081-000-0001" value="${esc(login.phone)}" onkeydown="if(event.key==='Enter')sendOtp()"></label>
+      <div class="err" id="lgErr" role="alert"></div>
+      <button class="btn primary block" style="margin-top:16px" onclick="sendOtp()">ขอรหัสยืนยัน (OTP)</button>`
+    : `<p class="hint" style="margin:18px 0 0">ส่งรหัส 6 หลักไปที่ ${esc(login.phone)} แล้ว · <a class="lnk" onclick="login.step='phone';renderAll()">เปลี่ยนเบอร์</a></p>
+      <label class="fl">รหัสยืนยัน<input id="lgCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" onkeydown="if(event.key==='Enter')verifyOtp()"></label>
+      <p class="hint">(สาธิต) รหัสคือ ${DEMO_OTP}</p>
+      <div class="err" id="lgErr" role="alert"></div>
+      <button class="btn primary block" style="margin-top:12px" onclick="verifyOtp()">เข้าสู่ระบบ</button>`}
+    <div class="divider">ยังไม่มีบัญชี?</div>
+    <p class="hint" style="margin:6px 0 8px">เปิดลิงก์สมัครที่ได้จากตัวแทนบริษัท หรือใส่รหัสบริษัท</p>
+    <div class="cbox"><input id="lgCompany" placeholder="รหัสบริษัท" maxlength="10" aria-label="รหัสบริษัท" onkeydown="if(event.key==='Enter')startJoin()"><button class="btn" onclick="startJoin()">สมัคร</button></div>
+    <details class="card demo-acc"><summary>${ic('swap', 18)} บัญชีทดลอง (สาธิต)</summary>
+      ${accounts.map(x => `<button class="srow" onclick="switchUser('${x.id}')">${avatarHtml(x, 34)}<span>${esc(x.name)}<small>${ROLE_LABEL[x.role]}${x.customer ? ' · ' + esc(custName(x.customer)) : ''} · ${esc(x.phone || '')}</small></span>${ic('right', 16, 2)}</button>`).join('')}</details>
+  </div>`;
+}
+function sendOtp() {
+  const p = $('lgPhone').value.replace(/[\s-]/g, '');
+  if (!validPhone(p)) { $('lgErr').textContent = 'เบอร์โทรไม่ถูกต้อง (เช่น 0810000001)'; return; }
+  login = { phone: p, step: 'otp' }; renderAll(); setTimeout(() => $('lgCode')?.focus(), 30);
+}
+function verifyOtp() {
+  if ($('lgCode').value.trim() !== DEMO_OTP) { $('lgErr').textContent = 'รหัสไม่ถูกต้อง'; return; }
+  const u = Object.values(users).find(x => x.phone === login.phone && !x.removed);
+  if (!u) { $('lgErr').textContent = 'ไม่พบบัญชีของเบอร์นี้ — สมัครด้วยลิงก์จากตัวแทนบริษัท หรือรอการอนุมัติ'; return; }
+  login = { phone: '', step: 'phone' }; switchUser(u.id);
+}
+function startJoin() {
+  const c = $('lgCompany').value.trim().toUpperCase();
+  if (!customers[c]) { toast('ไม่พบรหัสบริษัทนี้ — ขอลิงก์จากตัวแทนบริษัท'); return; }
+  joinCid = c; renderAll();
+}
+
+/* ---------- ทีมช่าง: โปรไฟล์ · ความถนัด · เพิ่ม/ลบ (หัวหน้า/แอดมิน) ---------- */
+const techs = () => Object.values(users).filter(u => u.role === 'technician' && !u.removed);
+const techLoad = id => tickets.filter(t => t.assignee === id && isOpen(t)).length;
+const techStats = id => { const done = tickets.filter(t => t.report?.by === id); return { open: techLoad(id), done: done.length, avg: avgRating(done) }; };
+const skillTags = u => (u.skills || []).map(k => `<span class="tag">${ic(CATEGORIES[k]?.icon || 'help', 13, 2)}${CATEGORIES[k]?.label || k}</span>`).join('');
+function renderTeam() {
+  const all = techs();
+  return pageHead('ทีมช่าง', `${all.length} คน · ${teams[currentUser.team] || teams.T1}`, canManageTeam(currentUser) ? ibtn('plus', 'เพิ่มช่าง', 'openTechForm()') : '')
+  + (all.length ? `<div class="list">${all.map(x => { const s = techStats(x.id);
+    return `<div class="tcard" onclick="openTech('${x.id}')" role="button" tabindex="0">
+      <div class="tc-h">${avatarHtml(x, 44)}<div class="tc-t"><b>${esc(x.name)}</b><small>${s.open ? `${s.open} งานเปิด` : 'ว่าง'} · เสร็จ ${s.done} งาน${s.avg ? ` · ★ ${num(s.avg)}` : ''}</small></div></div>
+      <div class="tc-f tc-f-wide">${skillTags(x) || '<span class="hint">ยังไม่ระบุความถนัด</span>'}</div></div>`; }).join('')}</div>` : empty('ยังไม่มีช่าง — กด + เพิ่มช่าง', 'team'));
+}
+function openTech(id) { pushSheet({ t: 'tech', id }); }
+function techSheet(id) {
+  const x = users[id];
+  if (!x || x.role !== 'technician' || x.removed || !canManageTeam(currentUser)) return [id, empty('ไม่พบข้อมูล', 'search')];
+  const s = techStats(id), open = tickets.filter(t => t.assignee === id && isOpen(t)).sort(byPriority), pj = projects.filter(p => p.owner === id);
+  return [x.name, `<div class="card profile-card">${avatarHtml(x, 88)}<h3 class="tk-title">${esc(x.name)}</h3><p class="hint">${ROLE_LABEL[x.role]} · ${teams[x.team] || ''}</p>
+      ${x.phone ? `<a class="btn sm" href="tel:${esc(x.phone)}">${ic('phone', 15, 2)}${esc(x.phone)}</a>` : ''}</div>
+    <div class="kpis in-sheet"><div class="kpi"><b>${s.open}</b><span>งานเปิด</span></div><div class="kpi"><b>${s.done}</b><span>งานเสร็จ</span></div>
+      <div class="kpi"><b>${s.avg ? '★ ' + num(s.avg) : '–'}</b><span>คะแนน</span></div><div class="kpi"><b>${pj.length}</b><span>โปรเจกต์</span></div></div>
+    ${fold('t-skills', 'ความถนัด', `<div class="card"><div class="badges">${skillTags(x) || '<span class="hint">ยังไม่ระบุ</span>'}</div></div>`)}
+    ${fold('t-jobs', 'งานที่กำลังทำ', open.length ? list(open) : empty('ไม่มีงานค้าง'), { count: open.length })}
+    ${pj.length ? fold('t-projects', 'โปรเจกต์', `<div class="list">${pj.map(projCard).join('')}</div>`, { count: pj.length, open: false }) : ''}
+    <div class="row"><button class="btn" onclick="openTechForm('${id}')">${ic('pen', 16, 2)}แก้ไข</button><button class="btn ghost-red" onclick="removeTech('${id}')">${ic('trash', 16, 2)}ลบช่าง</button></div>`];
+}
+let techPhoto = null;
+function openTechForm(id) {
+  if (!canManageTeam(currentUser)) return;
+  const x = id ? users[id] : null; techPhoto = x?.photo || null;
+  openModal(`<div class="mh"><h3>${x ? 'แก้ไขข้อมูลช่าง' : 'เพิ่มช่าง'}</h3>${xbtn()}</div>
+    <button type="button" class="join-photo" onclick="$('techFile').click()"><i id="techPh">${techPhoto && PHOTOS[techPhoto] ? `<img src="${PHOTOS[techPhoto]}" alt="">` : ic('camera', 28, 1.7)}</i>รูปโปรไฟล์</button>
+    <input type="file" id="techFile" accept="image/*" hidden onchange="techPhotoPick(this)">
+    <label class="fl">ชื่อ <em>*</em><input id="tName" maxlength="60" value="${esc(x?.name || '')}"></label>
+    <label class="fl">เบอร์โทร (ใช้เข้าสู่ระบบ) <em>*</em><input id="tPhone" type="tel" inputmode="tel" maxlength="15" value="${esc(x?.phone || '')}"></label>
+    <div class="fl">ถนัดงาน<div class="catpick">${Object.entries(CATEGORIES).filter(([k]) => k !== 'other').map(([k, c]) =>
+      `<label><input type="checkbox" name="skill" value="${k}" ${x?.skills?.includes(k) ? 'checked' : ''}><span>${ic(c.icon, 18)}${c.label}</span></label>`).join('')}</div></div>
+    <div class="err" id="tErr" role="alert"></div>
+    <div class="row end"><button class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn primary" onclick="saveTech(${x ? `'${id}'` : ''})">บันทึก</button></div>`);
+}
+async function techPhotoPick(input) {
+  const f = input.files[0]; input.value = '';
+  if (!f) return;
+  try { techPhoto = await compressPhoto(f); $('techPh').innerHTML = `<img src="${PHOTOS[techPhoto]}" alt="">`; } catch { toast('เปิดไฟล์รูปนี้ไม่ได้'); }
+}
+function saveTech(id) {
+  const u = currentUser; if (!canManageTeam(u)) return;
+  const name = $('tName').value.trim(), phone = $('tPhone').value.replace(/[\s-]/g, '');
+  const skills = [...document.querySelectorAll('input[name=skill]:checked')].map(i => i.value);
+  const dup = Object.values(users).some(x => x.phone === phone && x.id !== id && !x.removed);
+  const err = !name ? 'กรุณากรอกชื่อ' : !validPhone(phone) ? 'เบอร์โทรไม่ถูกต้อง' : dup ? 'เบอร์นี้มีในระบบแล้ว' : '';
+  if (err) { $('tErr').textContent = err; return; }
+  const data = { name, phone, skills, photo: techPhoto };
+  if (id) Object.assign(users[id], data);
+  else { const nid = `tech${nextTechNo++}`; users[nid] = { id: nid, role: 'technician', team: u.team || 'T1', ...data }; }
+  logAudit(u, `${id ? 'แก้ไข' : 'เพิ่ม'}ช่าง`, name);
+  closeModal(); toast(id ? 'บันทึกแล้ว' : `เพิ่ม ${name} แล้ว — เข้าสู่ระบบด้วยเบอร์ ${phone}`); renderAll();
+}
+/* ลบ = ปิดบัญชี (เก็บประวัติงานเดิมไว้) และต้องย้ายงาน/โปรเจกต์ที่ค้างก่อน ไม่ให้งานลูกค้าหลุด */
+function removeTech(id) {
+  const x = users[id]; if (!x || !canManageTeam(currentUser)) return;
+  const busy = techLoad(id) + projects.filter(p => p.owner === id && pct(p) < 100).length;
+  if (busy) return toast(`${x.name} มีงาน/โปรเจกต์ค้าง ${busy} รายการ — ย้ายให้คนอื่นก่อนจึงลบได้`);
+  openModal(`<div class="mh"><h3>ลบ ${esc(x.name)}?</h3>${xbtn()}</div>
+    <p class="hint" style="margin:0">ช่างคนนี้จะเข้าระบบไม่ได้อีก ประวัติงานเดิมยังอยู่ครบ</p>
+    <div class="row end"><button class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn primary" onclick="confirmRemoveTech('${id}')">ลบช่าง</button></div>`);
+}
+function confirmRemoveTech(id) {
+  const x = users[id]; if (!x || !canManageTeam(currentUser) || techLoad(id)) return;
+  x.removed = true; logAudit(currentUser, 'ลบช่าง', x.name);
+  closeModal(); closeSheet(); toast(`ลบ ${x.name} แล้ว`); renderAll();
+}
+
+/* ---------- แนะนำหมวดงานจากข้อความลูกค้า (ใช้จับคู่ช่างที่ถนัด) ---------- */
+const CAT_WORDS = { printer: ['พิมพ์', 'ปริ้น', 'printer', 'หมึก'], network: ['เน็ต', 'wifi', 'ไวไฟ', 'เครือข่าย', 'lan'], account: ['รหัส', 'password', 'vpn', 'ล็อกอิน', 'login', 'อีเมล'],
+  cctv: ['กล้อง', 'cctv', 'nvr'], install: ['ติดตั้ง', 'ลงโปรแกรม'], repair: ['เสีย', 'ซ่อม', 'จอ', 'เปิดไม่ติด', 'ค้าง', 'พัง'] };
+const guessCategory = text => { const s = String(text).toLowerCase(); return Object.keys(CAT_WORDS).find(k => CAT_WORDS[k].some(w => s.includes(w))) || 'other'; };
+console.assert(guessCategory('เครื่องพิมพ์ชั้น 2 พิมพ์ไม่ออก') === 'printer' && guessCategory('ติดตั้งกล้องหน้าร้าน') === 'cctv' && guessCategory('สวัสดี') === 'other', 'guessCategory');
+
+/* ---------- GPS: ระยะทางและเวลาถึงโดยประมาณ ---------- */
+const toRad = d => d * Math.PI / 180;
+function kmBetween([a, b], [c, d]) { const h = Math.sin(toRad(c - a) / 2) ** 2 + Math.cos(toRad(a)) * Math.cos(toRad(c)) * Math.sin(toRad(d - b) / 2) ** 2; return 2 * 6371 * Math.asin(Math.sqrt(h)); }
+console.assert(kmBetween([13.75, 100.5], [13.75, 100.5]) === 0 && Math.abs(kmBetween([0, 0], [0, 1]) - 111.19) < .1, 'kmBetween');
+// shortcut: ระยะเส้นตรง ×1.3 และความเร็วเมืองคงที่ 25 กม./ชม. — ใช้ Directions API (Google/Longdo) เมื่อต้องการตามถนนและการจราจรจริง
+function eta(m) {
+  const s = siteById(m.siteId); if (!s?.lat || !m.posLL) return null;
+  const km = kmBetween(m.posLL, [s.lat, s.lng]) * 1.3;
+  return { km, min: Math.max(1, Math.round(km / 25 * 60)) };
+}
+const etaText = e => !e ? '' : e.km < .1 ? 'ถึงที่หมายแล้ว' : `อีก ${num(e.km)} กม. · ประมาณ ${e.min} นาที`;
+/* แปลงพิกัดเป็นตำแหน่งบนแผนที่จำลอง: จุดเริ่ม (15,80) → ที่หมาย (85,20) */
+function mapXY(m, ll) {
+  const s = siteById(m.siteId), a = m.startLL;
+  return [15 + 70 * (ll[1] - a[1]) / ((s.lng - a[1]) || 1), 80 - 60 * (ll[0] - a[0]) / ((s.lat - a[0]) || 1)];
+}
+
+/* ---------- โน้ตส่วนตัวของแต่ละบัญชี ---------- */
+// shortcut: โน้ตเก็บในเบราว์เซอร์เครื่องนี้ — ย้ายไปเก็บที่ server เมื่อต้องเปิดจากหลายเครื่อง
+const notesKey = () => `gitsd-notes-${currentUser.id}`;
+function openNotes() {
+  const notes = store.get(notesKey(), []);
+  openModal(`<div class="mh"><h3>โน้ตส่วนตัว</h3>${xbtn()}</div><p class="hint" style="margin:0 0 10px">เห็นเฉพาะคุณ</p>
+    ${voiceBox('noteText', 'rows="3" maxlength="2000" placeholder="จดอะไรก็ได้…" aria-label="โน้ตใหม่"')}
+    <div class="crow">${voiceBtn('noteText')}<span class="sp"></span><button class="btn primary sm" onclick="addNote()">${ic('plus', 16, 2)}บันทึก</button></div>
+    ${notes.length ? `<div class="list dense" style="margin-top:14px">${notes.map((n, i) => `<div class="trow jrow"><div class="tr-m"><b class="note-txt">${esc(n.text)}</b><small>${fmt(new Date(n.at))}</small></div>${ibtn('trash', 'ลบโน้ต', `delNote(${i})`)}</div>`).join('')}</div>` : empty('ยังไม่มีโน้ต', 'note')}`);
+}
+function addNote() {
+  const t = $('noteText').value.trim(); if (!t) return;
+  stopVoice(); const notes = store.get(notesKey(), []); notes.unshift({ text: t, at: Date.now() }); store.set(notesKey(), notes); openNotes();
+}
+function delNote(i) { const notes = store.get(notesKey(), []); notes.splice(i, 1); store.set(notesKey(), notes); openNotes(); }
+
+/* ---------- โปรเจกต์: ผู้รับผิดชอบ + ความคืบหน้าตามขั้นตอน ---------- */
+const pct = p => p.tasks.length ? Math.round(p.tasks.filter(x => x.done).length / p.tasks.length * 100) : 0;
+const projCard = p => `<div class="tcard" onclick="openProject('${p.id}')" role="button" tabindex="0">
+  <div class="tc-h"><i class="tc-ic cat-${CATEGORIES[p.category] ? p.category : 'other'}">${ic(CATEGORIES[p.category]?.icon || 'folder', 22, 1.7)}</i><div class="tc-t"><b>${esc(p.name)}</b><small>${esc(custName(p.customer))} · ${esc(siteById(p.siteId)?.name || '-')}</small></div><b class="pct">${pct(p)}%</b></div>
+  <div class="pbar" role="progressbar" aria-valuenow="${pct(p)}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct(p)}%"></i></div>
+  <div class="tc-f"><span class="tag">${ic('user', 13, 2)}${esc(nameOf(p.owner))}</span><span class="tag ${p.due < new Date() && pct(p) < 100 ? 'warn' : ''}">${ic('clock', 13, 2)}กำหนด ${fmtD(p.due)}</span></div></div>`;
+let pjFilter = 'active';
+function setPjFilter(k) { pjFilter = k; renderAll(); }
+function renderProjects() {
+  const u = currentUser, vis = projects.filter(p => canSeeProject(u, p));
+  const arr = vis.filter(p => (pjFilter === 'done') === (pct(p) === 100)).sort((a, b) => a.due - b.due);
+  return pageHead('โปรเจกต์', u.role === 'customer' ? custName(u.customer) : 'งานติดตั้งและผู้รับผิดชอบ', isManager(u) ? ibtn('plus', 'สร้างโปรเจกต์', 'openProjectForm()') : '')
+  + `<div class="tbar">${textTabs([['active', 'กำลังทำ', vis.filter(p => pct(p) < 100).length], ['done', 'เสร็จแล้ว', vis.filter(p => pct(p) === 100).length]], pjFilter, 'setPjFilter')}</div>`
+  + (arr.length ? `<div class="list">${arr.map(projCard).join('')}</div>` : empty('ไม่มีโปรเจกต์', 'folder'));
+}
+function openProject(id) { pushSheet({ t: 'project', id }); }
+function projectSheet(id) {
+  const p = projects.find(x => x.id === id), u = currentUser;
+  if (!p || !canSeeProject(u, p)) return [id, empty('ไม่พบโปรเจกต์', 'search')];
+  const edit = canEditProject(u, p);
+  return [p.name, `<div class="card"><div class="badges"><span class="tag">${CATEGORIES[p.category]?.label || ''}</span><span class="sp"></span><b class="pct big">${pct(p)}%</b></div>
+      <h3 class="tk-title">${esc(p.name)}</h3><div class="pbar"><i style="width:${pct(p)}%"></i></div>
+      <dl class="facts" style="margin-top:12px"><dt>ลูกค้า</dt><dd>${esc(custName(p.customer))}</dd><dt>สถานที่</dt><dd>${esc(siteById(p.siteId)?.name || '-')}</dd>
+        <dt>ผู้รับผิดชอบ</dt><dd>${esc(nameOf(p.owner))}</dd><dt>กำหนดเสร็จ</dt><dd>${fmtD(p.due)}</dd></dl></div>
+    ${fold('pj-tasks', 'ขั้นตอนงาน', `<div class="card">${p.tasks.map((x, i) => `<label class="task ${x.done ? 'done' : ''}"><input type="checkbox" ${x.done ? 'checked' : ''} ${edit ? `onchange="toggleTask('${id}',${i})"` : 'disabled'}><span>${esc(x.text)}</span></label>`).join('') || '<p class="hint">ยังไม่มีขั้นตอน</p>'}
+      ${edit ? `<div class="cbox" style="margin-top:10px"><input id="newTask" placeholder="เพิ่มขั้นตอน…" maxlength="120" aria-label="ขั้นตอนใหม่" onkeydown="if(event.key==='Enter')addTask('${id}')"><button class="btn primary send" onclick="addTask('${id}')" aria-label="เพิ่มขั้นตอน">${ic('plus', 18, 2.4)}</button></div>` : ''}</div>`,
+      { count: `${p.tasks.filter(x => x.done).length}/${p.tasks.length}` })}`];
+}
+function toggleTask(id, i) {
+  const p = projects.find(x => x.id === id); if (!p || !canEditProject(currentUser, p)) return;
+  p.tasks[i].done = !p.tasks[i].done;
+  logAudit(currentUser, `โปรเจกต์ ${p.name}`, `${p.tasks[i].done ? '✓' : '↺'} ${p.tasks[i].text}`);
+  if (pct(p) === 100) notify(Object.values(users).filter(x => x.customer === p.customer || isManager(x)).map(x => x.id).filter(x => x !== currentUser.id), 'โปรเจกต์เสร็จแล้ว', p.name, null, 'projects');
+  renderAll();
+}
+function addTask(id) {
+  const p = projects.find(x => x.id === id), t = $('newTask').value.trim();
+  if (!t || !p || !canEditProject(currentUser, p)) return;
+  p.tasks.push({ text: t, done: false }); renderAll();
+}
+function openProjectForm() {
+  if (!isManager(currentUser)) return;
+  const first = Object.keys(customers)[0];
+  openModal(`<div class="mh"><h3>สร้างโปรเจกต์</h3>${xbtn()}</div>
+    <label class="fl">ชื่อโปรเจกต์ <em>*</em><input id="pjName" maxlength="80" placeholder="เช่น ติดตั้งกล้องวงจรปิด 8 จุด"></label>
+    <div class="two"><label class="fl">ประเภท<select id="pjCat">${Object.entries(CATEGORIES).map(([k, c]) => `<option value="${k}">${c.label}</option>`).join('')}</select></label>
+    <label class="fl">กำหนดเสร็จ <em>*</em><input id="pjDue" type="date" value="${new Date(Date.now() + 7 * DAY * 1000).toISOString().slice(0, 10)}"></label></div>
+    <label class="fl">ลูกค้า <em>*</em><select id="fCust" onchange="$('fSite').innerHTML=siteOptions(this.value)">${Object.values(customers).map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></label>
+    <label class="fl">สถานที่ <em>*</em><select id="fSite">${siteOptions(first)}</select></label>
+    <label class="fl">ผู้รับผิดชอบ <em>*</em><select id="pjOwner">${techs().map(x => `<option value="${x.id}">${esc(x.name)}${x.skills?.length ? ' — ถนัด ' + x.skills.map(k => CATEGORIES[k]?.label).join(', ') : ''}</option>`).join('')}</select></label>
+    <label class="fl">ขั้นตอนงาน (บรรทัดละ 1 ขั้น)<textarea id="pjTasks" rows="4" placeholder="สำรวจหน้างาน&#10;เดินสาย&#10;ติดตั้ง&#10;ส่งมอบ"></textarea></label>
+    <div class="err" id="pjErr" role="alert"></div>
+    <div class="row end"><button class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn primary" onclick="saveProject()">สร้างโปรเจกต์</button></div>`);
+}
+function saveProject() {
+  const u = currentUser; if (!isManager(u)) return;
+  const name = $('pjName').value.trim(), due = $('pjDue').value, owner = $('pjOwner').value, customer = $('fCust').value, siteId = $('fSite').value;
+  const err = !name ? 'กรุณากรอกชื่อโปรเจกต์' : !due ? 'กรุณาเลือกวันกำหนดเสร็จ' : !users[owner] ? 'กรุณาเลือกผู้รับผิดชอบ' : !sitesFor(u, customer).some(s => s.id === siteId) ? 'กรุณาเลือกสถานที่' : '';
+  if (err) { $('pjErr').textContent = err; return; }
+  const p = { id: `PJ${nextProjectNo++}`, name, category: $('pjCat').value, customer, siteId, owner, due: new Date(`${due}T17:00`), createdAt: new Date(),
+    tasks: $('pjTasks').value.split('\n').map(s => s.trim()).filter(Boolean).map(text => ({ text, done: false })) };
+  projects.push(p);
+  notify([owner], 'ได้รับมอบหมายโปรเจกต์', `${name} — ${custName(customer)}`, null, 'projects');
+  logAudit(u, 'สร้างโปรเจกต์', name);
+  closeModal(); toast('สร้างโปรเจกต์แล้ว'); renderAll(); openProject(p.id);
+}
+
 /* ---------- หน้า "ฉัน": โปรไฟล์ · โหมดสี · ตั้งค่า ---------- */
 function renderMe() {
   const u = currentUser;
   const row = (icon, label, fn, sub = '') => `<button class="srow" onclick="${fn}"><i>${ic(icon, 20, 1.8)}</i><span>${label}${sub ? `<small>${sub}</small>` : ''}</span>${ic('right', 16, 2)}</button>`;
   return pageHead('ฉัน')
-  + `<div class="profile"><div class="avatar">${ic(ROLE_META[u.role].icon, 26, 1.7)}</div><div><b>${esc(u.name)}</b><small>${ROLE_LABEL[u.role]} · ${u.customer ? esc(custName(u.customer)) : u.team ? teams[u.team] : 'Guru IT Solution'}</small></div></div>
+  + `<div class="profile">${avatarHtml(u, 52)}<div><b>${esc(u.name)}</b><small>${ROLE_LABEL[u.role]} · ${u.customer ? esc(custName(u.customer)) : u.team ? teams[u.team] : 'Guru IT Solution'}</small></div></div>
+  <div class="sgroup"><h4>ของฉัน</h4>
+    ${row('note', 'โน้ตส่วนตัว', 'openNotes()', `${store.get(notesKey(), []).length} โน้ต · เห็นเฉพาะคุณ`)}
+    ${row('bell', 'การแจ้งเตือน', 'openNotifs()', !('Notification' in window) ? 'เบราว์เซอร์นี้แจ้งเตือนได้เฉพาะในแอป' : Notification.permission === 'granted' ? 'เด้งเตือนบนเครื่องนี้: เปิดอยู่' : 'แตะเพื่อเปิดเด้งเตือนบนเครื่องนี้')}
+  </div>
   <div class="sgroup"><h4>การแสดงผล</h4>
     <div class="srow static"><i>${ic('palette', 20, 1.8)}</i><span>โหมดสี</span></div>
     <div class="theme-pick" role="radiogroup" aria-label="โหมดสี">${THEMES.map(([k, l, i]) => `<button role="radio" aria-checked="${theme === k}" class="${theme === k ? 'on' : ''}" onclick="setTheme('${k}')"><span class="sw sw-${k}">${ic(i, 20, 1.8)}</span>${l}</button>`).join('')}</div>
@@ -595,8 +910,10 @@ function renderMe() {
   ${isManager(u) ? `<div class="sgroup"><h4>จัดการ</h4>
     ${canManageUsers(u) ? row('team', 'ผู้ใช้และสิทธิ์', "goTab('users')") : ''}
     ${canSeeMissions(u) ? row('pin', 'ติดตามช่างภาคสนาม', "goTab('mission')") : ''}
+    ${row('building', 'พาร์ทเนอร์และสถานที่', "goTab('partners')")}
+    ${row('chart', 'รายงานผลงาน', "rpt.view='summary';goTab('reports')")}
     ${row('shield', 'บันทึกตรวจสอบ', "rpt.view='audit';goTab('reports')")}</div>` : ''}
-  <div class="sgroup"><h4>โหมดสาธิต</h4>${row('swap', 'สลับบทบาท', 'openRolePicker()', 'ลองใช้งานในฐานะลูกค้า ช่าง หัวหน้าทีม หรือผู้ดูแล')}</div>
+  <div class="sgroup"><h4>บัญชี</h4>${row('swap', 'สลับบทบาท (สาธิต)', 'openRolePicker()', 'ลองใช้งานในฐานะลูกค้า ช่าง หัวหน้าทีม หรือผู้ดูแล')}${row('logout', 'ออกจากระบบ', 'logout()')}</div>
   <p class="about"><img src="img/icon-192.png" alt="" width="28" height="28">Guru IT Service Desk · เวอร์ชันสาธิต</p>`;
 }
 
@@ -621,7 +938,7 @@ function renderSheet() {
   const v = sheetStack.at(-1); if (!v) return;
   const body = $('sheet').querySelector('.sheet-body');
   const keep = body && body.dataset.key === v.t + v.id ? body.scrollTop : 0;
-  const [title, inner] = v.t === 'partner' ? partnerSheet(v.id) : ticketSheet(v.id);
+  const [title, inner] = ({ partner: partnerSheet, tech: techSheet, project: projectSheet }[v.t] || ticketSheet)(v.id);
   $('sheet').innerHTML = `<div class="sheet-bar"><button class="ibtn" onclick="backSheet()" aria-label="กลับ">${ic('back', 22, 2)}</button><h2>${esc(title)}</h2>
     ${ibtn('fold', 'ย่อ / ขยายทั้งหมด', "toggleAllFolds('sheetInner')")}</div>
     <div class="sheet-body" data-key="${v.t + v.id}"><div class="sheet-inner" id="sheetInner">${inner}</div></div>`;
@@ -794,6 +1111,7 @@ function submitResolve(id) {
   pending.report = [];
   tk.comments.push({ by: u.id, vis: 'public', text: `งานเสร็จแล้ว — กรุณาตรวจสอบใบรายงาน ${no} และเซ็นรับงาน`, at: new Date() });
   logAudit(u, `ออกใบรายงาน ${no}`, `${id} → รอลูกค้าเซ็นรับ`);
+  if (next !== 'now') notify(Object.values(users).filter(x => x.customer === tk.customer).map(x => x.id), 'งานเสร็จแล้ว — กรุณาเซ็นรับ', tk.subject, id);
   renderAll();
   if (next === 'now') openSignOff(id); else { closeModal(); toast(`ออกใบรายงาน ${no} แล้ว — รอลูกค้าเซ็นรับ`); }
 }
@@ -909,11 +1227,14 @@ function submitReject(id) {
 function openAssign(id) {
   const tk = tickets.find(x => x.id === id);
   if (!canAssign(currentUser, tk)) return;
-  const techs = assignableTechs(currentUser).map(x => ({ ...x, load: tickets.filter(t => t.assignee === x.id && isOpen(t)).length })).sort((a, b) => a.load - b.load);
+  /* แนะนำช่าง: ถนัดหมวดงานนี้ก่อน แล้วค่อยดูว่าใครว่างที่สุด */
+  const cat = catOf(tk);
+  const ranked = assignableTechs(currentUser).map(x => ({ ...x, load: techLoad(x.id), fit: (x.skills || []).includes(cat) }))
+    .sort((a, b) => (b.fit - a.fit) || (a.load - b.load));
   openModal(`<div class="mh"><h3>มอบหมาย ${tk.id}</h3>${xbtn()}</div>
-    <p class="hint" style="margin:0 0 12px">${esc(tk.subject)} · <span class="prio-${tk.priority}">${PRIORITY_LABEL[tk.priority]}</span><br>${esc(custName(tk.customer))} · ${esc(siteLabel(tk))}</p>
-    <div class="opts">${techs.map((x, i) => `<label class="opt"><input type="radio" name="tech" value="${x.id}" ${(tk.assignee ? x.id === tk.assignee : i === 0) ? 'checked' : ''}>
-      <div><b>${esc(x.name)}</b>${i === 0 ? ' <span class="tagok">ว่างที่สุด</span>' : ''}<small>${x.load} งานเปิดอยู่ · ${teams[x.team]}</small></div></label>`).join('')}</div>
+    <p class="hint" style="margin:0 0 12px">${esc(tk.subject)} · <span class="prio-${tk.priority}">${PRIORITY_LABEL[tk.priority]}</span> · ${CATEGORIES[cat].label}<br>${esc(custName(tk.customer))} · ${esc(siteLabel(tk))}</p>
+    <div class="opts">${ranked.map((x, i) => `<label class="opt"><input type="radio" name="tech" value="${x.id}" ${(tk.assignee ? x.id === tk.assignee : i === 0) ? 'checked' : ''}>
+      ${avatarHtml(x, 36)}<div><b>${esc(x.name)}</b>${i === 0 ? ' <span class="tagok">แนะนำ</span>' : ''}<small>${x.fit ? `ถนัด${CATEGORIES[cat].label} · ` : ''}${x.load ? `${x.load} งานเปิดอยู่` : 'ว่าง'}</small></div></label>`).join('') || empty('ยังไม่มีช่างในทีม', 'team')}</div>
     <div class="row end"><button class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn primary" onclick="confirmAssign('${id}')">มอบหมาย</button></div>`);
 }
 function confirmAssign(id) {
@@ -923,6 +1244,7 @@ function confirmAssign(id) {
   tk.assignee = techId; tk.version++;
   if (tk.status === 'new') { tk.history.push({ from: 'new', to: 'assigned', by: currentUser.id, at: new Date() }); tk.status = 'assigned'; }
   logAudit(currentUser, `${prev ? 'ย้ายผู้รับผิดชอบ' : 'มอบหมาย'} ${id}`, `${prev ? nameOf(prev) + ' ' : ''}→ ${nameOf(techId)}`);
+  notify([techId], `ได้รับมอบหมายงาน${tk.priority === 'urgent' ? ' · ด่วนมาก' : ''}`, `${tk.subject} — ${siteLabel(tk)}`, id);
   closeModal(); toast(`มอบหมาย ${id} ให้ ${nameOf(techId)} แล้ว`); renderAll();
 }
 
@@ -949,13 +1271,15 @@ function submitCreateCustomer() {
   const siteId = sites.some(s => s.id === $('fSite')?.value) ? $('fSite').value : sites[0]?.id;
   const firstLine = desc.split('\n')[0] || 'แจ้งปัญหาพร้อมรูปภาพ';
   const id = `T-${nextTicketNo++}`;
-  tickets.unshift({ id, customer: u.customer, siteId, location: '', subject: firstLine.length > 60 ? firstLine.slice(0, 57) + '…' : firstLine, category: 'other',
-    priority: $('fUrgent').checked ? 'urgent' : 'medium', status: 'new', assignee: null, version: 1,
+  const subject = firstLine.length > 60 ? firstLine.slice(0, 57) + '…' : firstLine, urgent = $('fUrgent').checked;
+  tickets.unshift({ id, customer: u.customer, siteId, location: '', subject, category: guessCategory(desc),
+    priority: urgent ? 'urgent' : 'medium', status: 'new', assignee: null, version: 1,
     history: [{ from: null, to: 'new', by: u.id, at: new Date() }],
     comments: desc ? [{ by: u.id, vis: 'public', text: desc, at: new Date() }] : [], worklogs: [], missionId: null, report: null,
     photos: pending.create.slice() });
   pending.create = []; draft = { desc: '', urgent: false, site: '' };
   logAudit(u, `แจ้งปัญหา ${id}`, firstLine);
+  notify(dispatchers(), `งานใหม่${urgent ? ' · ด่วนมาก' : ''}`, `${subject} — ${custName(u.customer)}`, id);
   renderAll();
   openModal(`<div class="done"><div class="done-ic">${ic('check', 34, 3)}</div><h3>ส่งเรื่องเรียบร้อย</h3><p>เลขที่งาน <b class="mono">${id}</b></p></div>
     <ol class="next-steps"><li class="on"><i>${ic('check', 14, 3)}</i>เราได้รับเรื่องแล้ว</li><li><i>2</i>ทีมงานจะจัดช่างและติดต่อกลับ</li><li><i>3</i>ติดตามได้ที่ "งานของฉัน" — เราจะแจ้งเมื่อช่างออกเดินทาง</li></ol>
@@ -1001,6 +1325,7 @@ function submitCreate() {
     photos: pending.create.slice() });
   pending.create = [];
   logAudit(u, `สร้างงาน ${id}`, subj);
+  notify(dispatchers().filter(x => x !== u.id), 'งานใหม่', `${subj} — ${custName(customer)}`, id);
   closeModal(); toast(`สร้างงาน ${id} แล้ว`);
   renderAll(); openTicket(id);
 }
@@ -1290,16 +1615,18 @@ function missionCard(m) {
   if (!see) {
     body = `<div class="locked">${ic('lock', 20)}<div>ไม่แสดงตำแหน่ง — อยู่นอกขอบเขตสิทธิ์ของบทบาทนี้</div></div>`;
   } else {
-    const fr = m.session ? freshness(m.session.lastAt) : null;
+    const fr = m.session ? freshness(m.session.lastAt) : null, [px, py] = mapXY(m, m.posLL);
     body = `<div class="mapwrap">
-        <svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none"><path id="routeLine" d="M ${m.posXY[0]} ${m.posXY[1]} L ${m.destXY[0]} ${m.destXY[1]}" stroke-width="1.6" stroke-dasharray="3 2.5" fill="none" vector-effect="non-scaling-stroke"/></svg>
-        <div class="pin-dest" style="left:${m.destXY[0]}%;top:${m.destXY[1]}%"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-6.5 8-12a8 8 0 10-16 0c0 5.5 8 12 8 12z"/><circle cx="12" cy="10" r="3" fill="#fff"/></svg></div>
-        <div class="dot" id="gpsDot" style="left:${m.posXY[0]}%;top:${m.posXY[1]}%"></div></div>
+        <svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none"><path id="routeLine" d="M ${px} ${py} L 85 20" stroke-width="1.6" stroke-dasharray="3 2.5" fill="none" vector-effect="non-scaling-stroke"/></svg>
+        <div class="pin-dest" style="left:85%;top:20%"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-6.5 8-12a8 8 0 10-16 0c0 5.5 8 12 8 12z"/><circle cx="12" cy="10" r="3" fill="#fff"/></svg></div>
+        <div class="dot" id="gpsDot" style="left:${px}%;top:${py}%"></div></div>
       ${m.session ? `<div class="row" style="align-items:center;margin-top:8px"><span class="fresh f-${fr}">${fr === 'fresh' ? 'ตำแหน่งล่าสุด' : fr === 'stale' ? 'ล่าช้า' : 'ขาดการเชื่อมต่อ'}</span><span class="hint mono">${fmtS(m.session.lastAt)} · ±${m.session.acc}m</span></div>`
         : `<div class="hint" style="margin-top:8px">${canAct ? 'จะเริ่มแชร์ตำแหน่งเมื่อกด "ออกเดินทาง"' : 'ช่างยังไม่เริ่มแชร์ตำแหน่ง'} · แผนที่จำลอง</div>`}`;
   }
+  const e = m.status === 'completed' ? null : eta(m);
   return `<div class="card">
     <h4>${ic('pin', 18)} ${esc(m.dest)} <span class="pill p-in_progress" style="margin-left:auto">${MISSION_LABEL[m.status]}</span></h4>
+    ${e ? `<div class="eta" id="eta-${m.id}" aria-live="polite">${ic('nav', 20, 1.9)}<b>${etaText(e)}</b></div>` : ''}
     <div class="hint" style="margin-bottom:12px">ช่าง: ${esc(nameOf(m.technician))} · งาน <a class="lnk" onclick="openTicket('${m.ticketId}')">${m.ticketId}</a></div>
     ${fold('m-site', 'สถานที่', tk ? siteBox(tk, true) : '', { open: false })}
     ${fold('m-map', 'แผนที่', body)}${steps}
@@ -1322,12 +1649,14 @@ function startGps(m) {
   clearInterval(gpsTimer);
   gpsTimer = setInterval(() => {
     if (m.status !== 'en_route' && m.status !== 'working') { clearInterval(gpsTimer); gpsTimer = null; return; }
-    m.posXY[0] = Math.min(90, m.posXY[0] + (m.destXY[0] - m.posXY[0]) * .18 + (Math.random() * 4 - 2));
-    m.posXY[1] = Math.min(90, m.posXY[1] + (m.destXY[1] - m.posXY[1]) * .18 + (Math.random() * 4 - 2));
+    // shortcut: จำลองการเคลื่อนที่เข้าหาที่หมาย — ของจริงรับพิกัดจาก GPS มือถือช่างผ่าน server
+    const s = siteById(m.siteId), k = m.status === 'en_route' ? .12 : 0;
+    m.posLL = [m.posLL[0] + (s.lat - m.posLL[0]) * k, m.posLL[1] + (s.lng - m.posLL[1]) * k];
     m.session.lastAt = new Date(); m.session.acc = Math.round(10 + Math.random() * 20);
-    const dot = $('gpsDot'), ln = $('routeLine');
-    if (dot) { dot.style.left = m.posXY[0] + '%'; dot.style.top = m.posXY[1] + '%'; }
-    if (ln) ln.setAttribute('d', `M ${m.posXY[0]} ${m.posXY[1]} L ${m.destXY[0]} ${m.destXY[1]}`);
+    const [x, y] = mapXY(m, m.posLL), dot = $('gpsDot'), ln = $('routeLine'), el = $(`eta-${m.id}`);
+    if (dot) { dot.style.left = x + '%'; dot.style.top = y + '%'; }
+    if (ln) ln.setAttribute('d', `M ${x} ${y} L 85 20`);
+    if (el) el.querySelector('b').textContent = etaText(eta(m));
   }, 3000);
 }
 function stopGps(m) { clearInterval(gpsTimer); gpsTimer = null; logAudit(users[m.technician], 'สิ้นสุดการแชร์ตำแหน่ง', `ภารกิจ ${m.id}`); }
@@ -1351,12 +1680,12 @@ function auditRows(rows) {
 /* ---------- Render ---------- */
 function renderAll() {
   const u = currentUser;
-  $('tabbar').hidden = !!joinCid;
-  if (joinCid) { $('shell').className = 'shell joining'; $('fab').hidden = true; $('screen').innerHTML = `<div class="page">${renderJoin()}</div>`; return; }
+  $('tabbar').hidden = !!joinCid || !u;
+  if (joinCid || !u) { $('shell').className = 'shell joining'; $('fab').hidden = true; $('screen').innerHTML = `<div class="page">${joinCid ? renderJoin() : renderLogin()}</div>`; return; }
   $('shell').className = `shell role-${u.role}`;
   renderTabbar();
   const home = { customer: homeCustomer, technician: homeTech, team_leader: homeLead, admin: homeAdmin }[u.role];
-  const screens = { home: () => home(u), tickets: renderTickets, mission: renderMission, partners: renderPartners, reports: renderReports, users: renderUsers, me: renderMe };
+  const screens = { home: () => home(u), tickets: renderTickets, mission: renderMission, partners: renderPartners, reports: renderReports, users: renderUsers, me: renderMe, projects: renderProjects, team: renderTeam };
   $('screen').innerHTML = `<div class="page">${screens[tab]()}</div>`;
   renderFab();
   if (sheetStack.length) renderSheet();
@@ -1367,3 +1696,4 @@ document.addEventListener('keydown', e => {
 });
 applyTheme();
 renderAll();
+if (currentUser) setTimeout(deliverNotifs, 600);
