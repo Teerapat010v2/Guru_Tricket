@@ -47,6 +47,8 @@ const STATUS_LABEL = {
 };
 const PRIORITY_LABEL = { urgent: 'ด่วนมาก', high: 'สูง', medium: 'ปานกลาง', low: 'ต่ำ' };
 const PRIORITY_ORDER = { urgent: 0, high: 1, medium: 2, low: 3 };
+/* ประเภทงาน (ไม่มี type = งานบริการ) — โปรเจกต์แยกเป็นข้อมูลของตัวเองใน projects */
+const TYPE_LABEL = { service: 'งานบริการ', complaint: 'ร้องเรียน' };
 
 /* ภาษาที่ลูกค้าเข้าใจ: ย่อ 6 สถานะเหลือ 4 ขั้น */
 const CUST_STEPS = ['รับเรื่อง', 'มอบหมายช่าง', 'กำลังแก้ไข', 'เสร็จสิ้น'];
@@ -167,6 +169,11 @@ let tickets = [
 const PHOTOS = {};
 let nextPhotoNo = 1;
 const RATE_LABEL = ['', 'ต้องปรับปรุง', 'พอใช้', 'ปานกลาง', 'ดี', 'ดีมาก'];
+tickets.push({ id: 'T-0997', type: 'complaint', customer: 'C1', siteId: 'S2', location: '', subject: 'ช่างมาช้ากว่านัดเกือบ 2 ชั่วโมง ไม่มีใครโทรแจ้ง', category: 'other',
+  priority: 'high', status: 'new', assignee: null, version: 1,
+  history: [{ from: null, to: 'new', by: 'cust1', at: t(-3600) }],
+  comments: [{ by: 'cust1', vis: 'public', text: 'นัดไว้ 9 โมง ช่างมาเกือบ 11 โมง อยากให้โทรแจ้งก่อนถ้าจะมาช้า', at: t(-3600) }],
+  worklogs: [], missionId: null, report: null });
 let nextTicketNo = 1005;
 
 /* โปรเจกต์ (งานติดตั้งหลายขั้นตอน) — ความคืบหน้า = งานย่อยที่เสร็จ / ทั้งหมด */

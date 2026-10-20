@@ -88,6 +88,7 @@ let sheetStack = [];          // [{t:'ticket'|'partner', id}]
 let tab = 'home';
 let filter = 'all';
 let homeTab = null;
+let jobType = 'service';   // ประเภทงานที่หัวหน้าเลือกดู
 let query = '', showSearch = false;
 let cmtVis = 'public';
 let cmtDraft = '';
@@ -384,6 +385,7 @@ const densityBtn = () => ibtn(dense ? 'cards' : 'rows', dense ? 'ขยายร
 const empty = (msg, icon = 'check') => `<div class="empty">${ic(icon, 30, 1.5)}<div>${msg}</div></div>`;
 /* ไอคอนงาน: รูปที่ลูกค้าถ่ายมา (ถ้ามี) ไม่งั้นใช้ไอคอนตามหมวดงาน */
 const catOf = tk => CATEGORIES[tk.category] ? tk.category : 'other';
+const complaintTag = tk => (tk.type === 'complaint' ? `<span class="tag warn">${ic('alert', 13, 2)}ร้องเรียน</span>` : '');
 function ticketIcon(tk) {
   const p = tk.photos?.find(id => PHOTOS[id]);
   return p ? `<i class="tc-ic photo"><img src="${PHOTOS[p]}" alt="รูปปัญหาที่ลูกค้าถ่าย" loading="lazy"></i>`
@@ -410,14 +412,14 @@ function ticketCard(tk, opts = {}) {
     const cs = custStatus(tk);
     return `<div class="tcard ${tk.status === 'resolved' ? 'attn' : ''}" onclick="openTicket('${tk.id}')" role="button" tabindex="0">
       <div class="tc-h">${ticketIcon(tk)}<div class="tc-t"><b>${esc(tk.subject)}</b><small>${tk.id} · แจ้ง ${ago(tk.history[0].at)}</small></div></div>
-      <div class="tc-f"><span class="pill p-${tk.status}">${esc(cs.t)}</span>${tk.photos?.length ? `<span class="tag">${ic('camera', 13, 2)}${tk.photos.length}</span>` : ''}</div>
+      <div class="tc-f">${complaintTag(tk)}<span class="pill p-${tk.status}">${esc(cs.t)}</span>${tk.photos?.length ? `<span class="tag">${ic('camera', 13, 2)}${tk.photos.length}</span>` : ''}</div>
       ${qbtn}
     </div>`;
   }
   return `<div class="tcard" onclick="openTicket('${tk.id}')" role="button" tabindex="0">
     <div class="tc-h">${ticketIcon(tk)}<div class="tc-t"><b>${esc(tk.subject)}</b><small>${tk.id} · ${esc(custName(tk.customer))}</small></div>
       ${['urgent', 'high'].includes(tk.priority) ? `<span class="prio prio-${tk.priority}">${PRIORITY_LABEL[tk.priority]}</span>` : ''}</div>
-    <div class="tc-f"><span class="pill p-${tk.status}">${STATUS_LABEL[tk.status]}</span>
+    <div class="tc-f">${complaintTag(tk)}<span class="pill p-${tk.status}">${STATUS_LABEL[tk.status]}</span>
       ${isManager(u) ? `<span class="tag ${tk.assignee ? '' : 'warn'}">${ic('user', 13, 2)}${tk.assignee ? esc(nameOf(tk.assignee)) : 'ยังไม่มอบหมาย'}</span>` : `<span class="tag">${esc(siteOf(tk)?.name || '-')}</span>`}
       ${tk.rating ? starsHtml(tk.rating.score, 12) : ''}<span class="sp"></span>${qbtn}</div>
   </div>`;
@@ -435,7 +437,8 @@ function homeCustomer(u) {
   + tiles([
       { icon: 'pen', label: 'แจ้งปัญหา', fn: 'openCreate()' },
       SR && { icon: 'mic', label: 'พูดแจ้งปัญหา', fn: "openCreate('voice')" },
-      { icon: 'camera', label: 'ถ่ายรูปแจ้ง', fn: "openCreate('photo')" }])
+      { icon: 'camera', label: 'ถ่ายรูปแจ้ง', fn: "openCreate('photo')" },
+      { icon: 'chat', label: 'ร้องเรียน / ติชม', fn: "openCreate('complaint')" }])
   + (pendingJoins(u).length ? fold('c-join', 'คำขอเข้าใช้งาน', `<div class="list dense">${pendingJoins(u).map(joinRow).join('')}</div>`, { count: pendingJoins(u).length, hot: true }) : '')
   + (toSign.length ? fold('c-sign', 'รอคุณเซ็นรับ', list(toSign, { quick: true }), { count: toSign.length, hot: true }) : '')
   + fold('c-open', 'กำลังดำเนินการ', open.length ? list(open) : empty('ไม่มีงานค้าง — ทุกอย่างเรียบร้อย'), { count: open.length })
@@ -443,9 +446,20 @@ function homeCustomer(u) {
   + (toRate.length ? `<button class="mcard nudge" onclick="openRating('${toRate[0].id}')"><i>${ic('star', 22, 1.8)}</i><div><b>บริการครั้งล่าสุดเป็นอย่างไร?</b><small>${esc(toRate[0].subject)} — แตะเพื่อให้คะแนน</small></div>${ic('right', 18, 2)}</button>` : '');
 }
 
+/* ---------- ประเภทงานสำหรับหัวหน้า/แอดมิน: งานบริการ · ร้องเรียน · โปรเจกต์ ---------- */
+const typeOf = tk => tk.type || 'service';
+const ofType = (u, arr) => isManager(u) ? arr.filter(tk => typeOf(tk) === jobType) : arr;
+function setJobType(k, page) { if (k === 'project' && page === 'tickets') return goTab('projects'); jobType = k; homeTab = null; filter = 'all'; renderAll(); }
+function typeChips(u, page) {
+  const open = k => visibleTickets(u).filter(tk => typeOf(tk) === k && isOpen(tk)).length;
+  const items = [['service', TYPE_LABEL.service, open('service')], ['complaint', TYPE_LABEL.complaint, open('complaint')], ['project', 'โปรเจกต์', projects.filter(p => canSeeProject(u, p) && pct(p) < 100).length]];
+  return `<div class="tchips" role="tablist" aria-label="ประเภทงาน">${items.map(([k, l, n]) =>
+    `<button role="tab" aria-selected="${jobType === k}" class="${jobType === k ? 'on' : ''} ${k === 'complaint' && n ? 'hot' : ''}" onclick="setJobType('${k}','${page}')">${l}${n ? ` <b>${n}</b>` : ''}</button>`).join('')}</div>`;
+}
+
 /* ---------- หน้าแรก: ทีมงาน (แท็บ = สิ่งที่ต้องทำ) ---------- */
 function workTabs(u) {
-  const vis = visibleTickets(u).slice().sort(byPriority);
+  const vis = ofType(u, visibleTickets(u)).slice().sort(byPriority);
   const f = (k, l, pred) => { const arr = vis.filter(pred); return { k, l, arr }; };
   if (u.role === 'technician') return [
     f('todo', 'ต้องทำ', x => ['assigned', 'in_progress'].includes(x.status)),
@@ -459,9 +473,13 @@ function workTabs(u) {
 }
 function setHomeTab(k) { homeTab = k; renderAll(); }
 function workSection(u) {
+  if (isManager(u) && jobType === 'project') {
+    const pj = projects.filter(p => canSeeProject(u, p) && pct(p) < 100).sort((a, b) => a.due - b.due);
+    return typeChips(u, 'home') + (pj.length ? `<div class="list">${pj.map(projCard).join('')}</div>` : empty('ไม่มีโปรเจกต์ที่กำลังทำ', 'folder'));
+  }
   const tabsData = workTabs(u);
   const cur = tabsData.find(t => t.k === homeTab) || tabsData.find(t => t.arr.length) || tabsData[0];
-  return `<div class="tbar">${textTabs(tabsData.map(t => [t.k, t.l, t.arr.length]), cur.k, 'setHomeTab')}</div>
+  return `${isManager(u) ? typeChips(u, 'home') : ''}<div class="tbar">${textTabs(tabsData.map(t => [t.k, t.l, t.arr.length]), cur.k, 'setHomeTab')}</div>
     ${cur.arr.length ? list(cur.arr, { quick: true }) : empty(`ไม่มีงาน "${cur.l}"`)}`;
 }
 function homeTech(u) {
@@ -511,7 +529,7 @@ function filtersFor(u) {
 function filteredTickets() {
   const f = filtersFor(currentUser).find(x => x[0] === filter) || filtersFor(currentUser)[0];
   const q = query.trim().toLowerCase();
-  return visibleTickets(currentUser).filter(f[2]).filter(x => !q ||
+  return ofType(currentUser, visibleTickets(currentUser)).filter(f[2]).filter(x => !q ||
     [x.id, x.subject, siteLabel(x), siteOf(x)?.address, custName(x.customer), nameOf(x.assignee), x.report?.no].some(s => String(s ?? '').toLowerCase().includes(q))).sort(byPriority);
 }
 function toggleSearch() { showSearch = !showSearch; if (!showSearch) query = ''; renderAll(); if (showSearch) setTimeout(() => $('q')?.focus(), 30); }
@@ -519,9 +537,11 @@ function renderTickets() {
   const u = currentUser;
   const title = { customer: 'งานของฉัน', technician: 'งานของฉัน', team_leader: 'งานทั้งหมด', admin: 'งานทั้งหมด' }[u.role];
   const sub = { customer: custName(u.customer), technician: 'เฉพาะงานที่มอบหมายให้คุณ', team_leader: 'ทุกงานในระบบ', admin: 'ทุกงานในระบบ' }[u.role];
-  const vis = visibleTickets(u);
+  if (isManager(u) && jobType === 'project') jobType = 'service';
+  const vis = ofType(u, visibleTickets(u));
   return pageHead(title, sub, ibtn('search', 'ค้นหา', 'toggleSearch()', showSearch))
   + (showSearch ? `<div class="searchbox">${ic('search', 18)}<input id="q" type="search" placeholder="ค้นหาเลขงาน หัวข้อ สถานที่…" value="${esc(query)}" oninput="query=this.value;$('tlist').innerHTML=ticketListHtml()" aria-label="ค้นหางาน"></div>` : '')
+  + (isManager(u) ? typeChips(u, 'tickets') : '')
   + `<div class="tbar">${textTabs(filtersFor(u).map(([k, l, f]) => [k, l, vis.filter(f).length]), filter, 'setFilter')}<span class="sp"></span>${densityBtn()}</div>
   <div id="tlist">${ticketListHtml()}</div>`;
 }
@@ -1266,15 +1286,17 @@ function confirmAssign(id) {
 }
 
 /* ---------- แจ้งปัญหา (ลูกค้า): พิมพ์ / พูด / ถ่ายรูป — ช่องเดียวจบ ---------- */
+let createType = 'service';
 function openCreateCustomer(mode) {
-  const u = currentUser, sites = sitesFor(u, u.customer);
-  openModal(`<div class="mh"><h3>แจ้งปัญหา</h3>${xbtn()}</div>
-    <p class="lead-hint">บอกเราสั้น ๆ ว่าเกิดอะไรขึ้น</p>
-    ${voiceBox('fDesc', 'rows="4" placeholder="เช่น เครื่องพิมพ์ชั้น 2 พิมพ์ไม่ออก" oninput="draft.desc=this.value" aria-label="ปัญหาที่พบ"', draft.desc)}
+  const u = currentUser, sites = sitesFor(u, u.customer), cpl = mode === 'complaint';
+  createType = cpl ? 'complaint' : 'service';
+  openModal(`<div class="mh"><h3>${cpl ? 'ร้องเรียน / ติชมบริการ' : 'แจ้งปัญหา'}</h3>${xbtn()}</div>
+    <p class="lead-hint">${cpl ? 'เล่าสิ่งที่ไม่พอใจ — หัวหน้าทีมจะดูแลเรื่องนี้โดยตรง' : 'บอกเราสั้น ๆ ว่าเกิดอะไรขึ้น'}</p>
+    ${voiceBox('fDesc', `rows="4" placeholder="${cpl ? 'เช่น ช่างมาช้ากว่านัด ไม่มีใครโทรแจ้ง' : 'เช่น เครื่องพิมพ์ชั้น 2 พิมพ์ไม่ออก'}" oninput="draft.desc=this.value" aria-label="${cpl ? 'เรื่องที่ร้องเรียน' : 'ปัญหาที่พบ'}"`, draft.desc)}
     <div class="tools big">${voiceBtn('fDesc', 'พูดแทนพิมพ์')}${photoBtn('create', 'ถ่าย / แนบรูป')}</div>
     ${thumbsBox('create')}
     ${sites.length > 1 ? `<label class="fl">ที่ไหน?<select id="fSite" onchange="draft.site=this.value">${sites.map(s => `<option value="${s.id}" ${(draft.site || u.siteId) === s.id ? 'selected' : ''}>${esc(s.name)}</option>`).join('')}</select></label>` : ''}
-    <label class="urgent-toggle"><input type="checkbox" id="fUrgent" ${draft.urgent ? 'checked' : ''} onchange="draft.urgent=this.checked"><span><b>ด่วน</b><small>ใช้งานไม่ได้เลย / กระทบหลายคน</small></span></label>
+    ${cpl ? '' : `<label class="urgent-toggle"><input type="checkbox" id="fUrgent" ${draft.urgent ? 'checked' : ''} onchange="draft.urgent=this.checked"><span><b>ด่วน</b><small>ใช้งานไม่ได้เลย / กระทบหลายคน</small></span></label>`}
     <div class="err" id="fErr" role="alert"></div>
     <button class="btn primary block" onclick="submitCreateCustomer()">${ic('send', 18, 2.2)}ส่งเรื่อง</button>`);
   /* ทางลัดจากหน้าแรก: เริ่มฟังเสียง หรือเปิดกล้องทันที (ยังอยู่ในจังหวะที่ผู้ใช้แตะ) */
@@ -1288,15 +1310,15 @@ function submitCreateCustomer() {
   const siteId = sites.some(s => s.id === $('fSite')?.value) ? $('fSite').value : sites[0]?.id;
   const firstLine = desc.split('\n')[0] || 'แจ้งปัญหาพร้อมรูปภาพ';
   const id = `T-${nextTicketNo++}`;
-  const subject = firstLine.length > 60 ? firstLine.slice(0, 57) + '…' : firstLine, urgent = $('fUrgent').checked;
-  tickets.unshift({ id, customer: u.customer, siteId, location: '', subject, category: guessCategory(desc),
-    priority: urgent ? 'urgent' : 'medium', status: 'new', assignee: null, version: 1,
+  const subject = firstLine.length > 60 ? firstLine.slice(0, 57) + '…' : firstLine, urgent = !!$('fUrgent')?.checked, cpl = createType === 'complaint';
+  tickets.unshift({ id, type: createType, customer: u.customer, siteId, location: '', subject, category: cpl ? 'other' : guessCategory(desc),
+    priority: urgent ? 'urgent' : cpl ? 'high' : 'medium', status: 'new', assignee: null, version: 1,
     history: [{ from: null, to: 'new', by: u.id, at: new Date() }],
     comments: desc ? [{ by: u.id, vis: 'public', text: desc, at: new Date() }] : [], worklogs: [], missionId: null, report: null,
     photos: pending.create.slice() });
   pending.create = []; draft = { desc: '', urgent: false, site: '' };
   logAudit(u, `แจ้งปัญหา ${id}`, firstLine);
-  notify(dispatchers(), `งานใหม่${urgent ? ' · ด่วนมาก' : ''}`, `${subject} — ${custName(u.customer)}`, id);
+  notify(dispatchers(), cpl ? 'เรื่องร้องเรียนใหม่' : `งานใหม่${urgent ? ' · ด่วนมาก' : ''}`, `${subject} — ${custName(u.customer)}`, id);
   renderAll();
   openModal(`<div class="done"><div class="done-ic">${ic('check', 34, 3)}</div><h3>ส่งเรื่องเรียบร้อย</h3><p>เลขที่งาน <b class="mono">${id}</b></p></div>
     <ol class="next-steps"><li class="on"><i>${ic('check', 14, 3)}</i>เราได้รับเรื่องแล้ว</li><li><i>2</i>ทีมงานจะจัดช่างและติดต่อกลับ</li><li><i>3</i>ติดตามได้ที่ "งานของฉัน" — เราจะแจ้งเมื่อช่างออกเดินทาง</li></ol>

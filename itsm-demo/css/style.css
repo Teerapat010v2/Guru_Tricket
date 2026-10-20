@@ -75,8 +75,15 @@ a{color:var(--primary)}
 .ibtn.demo span{font-size:10px;font-weight:600;letter-spacing:.4px;border:1px solid currentColor;border-radius:4px;padding:0 4px;line-height:15px}
 
 /* ทางลัด: การ์ดสี่เหลี่ยมสีอ่อน */
-.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-bottom:22px}
-.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:104px;padding:14px 8px;border:0;border-radius:var(--radius);background:var(--card);cursor:pointer;font:inherit;font-size:13.5px;text-align:center;line-height:1.35;transition:background .15s,transform .1s}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px;margin-bottom:22px}
+.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:96px;padding:14px 8px;border:0;border-radius:var(--radius);background:var(--card);cursor:pointer;font:inherit;font-size:13.5px;text-align:center;line-height:1.35;transition:background .15s,transform .1s}
+/* ประเภทงาน (หัวหน้า): ชิปแบบเม็ดยา */
+.tchips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 0 6px;padding:2px 0}
+.tchips::-webkit-scrollbar{display:none}
+.tchips button{flex:none;border:0;border-radius:999px;padding:8px 16px;min-height:38px;background:var(--card);color:var(--text-2);font:inherit;font-size:14px;cursor:pointer}
+.tchips button b{font-weight:600;margin-left:2px}
+.tchips button.on{background:var(--primary-s);color:var(--primary);font-weight:500}
+.tchips button.hot b{color:var(--danger)}
 .tile:hover{background:var(--card-2)}
 .tile:active{transform:scale(.97)}
 .tile i{position:relative;color:var(--primary)}
