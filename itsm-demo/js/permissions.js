@@ -46,6 +46,7 @@ function canRate(u, tk) {
 }
 /* ลูกค้าเห็นแค่ "ขั้นตอน" ของภารกิจ (เช่น กำลังเดินทาง) — ไม่เห็นตำแหน่ง GPS */
 function canSeeMissionStatus(u, tk) { return u.role === 'customer' ? tk.customer === u.customer : canSeeTicket(u, tk); }
+function canApproveMembers(u, customerId) { return u.role === 'customer' && !!u.approver && u.customer === customerId; }
 function canRejectWork(u, tk) { return u.role === 'customer' && tk.customer === u.customer && tk.status === 'resolved'; }
 function canSeeSummaryReport(u) { return isManager(u); }
 
@@ -71,6 +72,7 @@ function canManageUsers(u) { return u.role === 'admin'; }
 /* ตารางสิทธิ์สำหรับหน้าผู้ดูแล (สรุปจากกฎด้านบน) */
 const PERMISSION_MATRIX = [
   ['แจ้งปัญหาใหม่',               { customer: 1, technician: 0, team_leader: 1, admin: 1 }],
+  ['อนุมัติพนักงานใหม่ของบริษัท',   { customer: 'ตัวแทนบริษัท', technician: 0, team_leader: 0, admin: 0 }],
   ['เห็นงาน',                     { customer: 'ของบริษัท', technician: 'ของตัวเอง', team_leader: 'ทั้งหมด', admin: 'ทั้งหมด' }],
   ['มอบหมายงาน',                  { customer: 0, technician: 0, team_leader: 'ในทีม', admin: 1 }],
   ['เปลี่ยนสถานะงาน',             { customer: 0, technician: 'งานของตัวเอง', team_leader: 1, admin: 1 }],

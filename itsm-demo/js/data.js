@@ -4,8 +4,9 @@ const DAY = 86400;
 const YEAR = new Date().getFullYear();
 
 const users = {
-  cust1:  { id: 'cust1',  name: 'สมหญิง',   role: 'customer',    customer: 'C1' },
-  cust2:  { id: 'cust2',  name: 'วรรณา',    role: 'customer',    customer: 'C2' },
+  /* approver = ตัวแทน/หัวหน้าของบริษัทลูกค้า ผู้อนุมัติพนักงานที่สมัครเข้ามา */
+  cust1:  { id: 'cust1',  name: 'สมหญิง',   role: 'customer',    customer: 'C1', approver: true },
+  cust2:  { id: 'cust2',  name: 'วรรณา',    role: 'customer',    customer: 'C2', approver: true },
   tech1:  { id: 'tech1',  name: 'ชาติชาย',  role: 'technician',  team: 'T1' },
   tech2:  { id: 'tech2',  name: 'วิภา',     role: 'technician',  team: 'T1' },
   lead1:  { id: 'lead1',  name: 'ประภาส',   role: 'team_leader', team: 'T1' },
@@ -163,6 +164,10 @@ const PHOTOS = {};
 let nextPhotoNo = 1;
 const RATE_LABEL = ['', 'ต้องปรับปรุง', 'พอใช้', 'ปานกลาง', 'ดี', 'ดีมาก'];
 let nextTicketNo = 1005;
+
+/* คำขอสมัครใช้งานจากลิงก์ชวน (?join=รหัสบริษัท) — รอตัวแทนบริษัทอนุมัติ */
+let joinRequests = [];
+let nextJoinNo = 1, nextUserNo = 1;
 let nextReportNo = 4;
 
 let missions = {

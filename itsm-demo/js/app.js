@@ -267,7 +267,7 @@ function screensFor(u) {
 }
 function tabBadge(u, id) {
   const vis = visibleTickets(u);
-  if (id === 'home' && u.role === 'customer') return vis.filter(x => canSignOff(u, x)).length;
+  if (id === 'home' && u.role === 'customer') return vis.filter(x => canSignOff(u, x)).length + pendingJoins(u).length;
   if (id !== 'tickets') return 0;
   if (isManager(u)) return vis.filter(x => x.status === 'new').length;
   if (u.role === 'technician') return vis.filter(x => x.status === 'assigned').length;
@@ -410,6 +410,7 @@ function homeCustomer(u) {
       { icon: 'pen', label: 'แจ้งปัญหา', fn: 'openCreate()' },
       SR && { icon: 'mic', label: 'พูดแจ้งปัญหา', fn: "openCreate('voice')" },
       { icon: 'camera', label: 'ถ่ายรูปแจ้ง', fn: "openCreate('photo')" }])
+  + (pendingJoins(u).length ? fold('c-join', 'คำขอเข้าใช้งาน', `<div class="list dense">${pendingJoins(u).map(joinRow).join('')}</div>`, { count: pendingJoins(u).length, hot: true }) : '')
   + (toSign.length ? fold('c-sign', 'รอคุณเซ็นรับ', list(toSign, { quick: true }), { count: toSign.length, hot: true }) : '')
   + fold('c-open', 'กำลังดำเนินการ', open.length ? list(open) : empty('ไม่มีงานค้าง — ทุกอย่างเรียบร้อย'), { count: open.length })
   + (toRate.length ? `<button class="mcard nudge" onclick="openRating('${toRate[0].id}')"><i>${ic('star', 22, 1.8)}</i><div><b>บริการครั้งล่าสุดเป็นอย่างไร?</b><small>${esc(toRate[0].subject)} — แตะเพื่อให้คะแนน</small></div>${ic('right', 18, 2)}</button>` : '');
@@ -506,6 +507,79 @@ function ticketListHtml() {
 }
 function setFilter(k) { filter = k; renderAll(); }
 
+/* ---------- สมัครใช้งานจากลิงก์ชวนของตัวแทนบริษัท (?join=รหัสบริษัท) ---------- */
+// shortcut: ลิงก์ใช้รหัสบริษัทตรง ๆ จึงเดาได้ (แต่ยังต้องรออนุมัติ) — ระบบจริงใช้โทเคนสุ่มที่ยกเลิก/หมดอายุได้
+let joinCid = new URLSearchParams(location.search).get('join');
+let joinDraft = { name: '', phone: '', photo: null }, joinDone = false;
+const validPhone = p => /^0\d{8,9}$/.test(p.replace(/[\s-]/g, ''));
+console.assert(validPhone('081-234-5678') && validPhone('02 000 0001') && !validPhone('12345') && !validPhone('08123456789012'), 'validPhone');
+const approverOf = cid => Object.values(users).find(u => u.customer === cid && u.approver);
+function renderJoin() {
+  const c = customers[joinCid];
+  if (!c) return `<div class="join">${empty('ลิงก์สมัครไม่ถูกต้อง — ขอลิงก์ใหม่จากตัวแทนบริษัทของคุณ', 'alert')}</div>`;
+  if (joinDone) return `<div class="join"><div class="done"><div class="done-ic">${ic('check', 34, 3)}</div><h3>ส่งคำขอแล้ว</h3>
+    <p class="hint">ตัวแทนของ ${esc(c.name)} จะยืนยันว่าคุณเป็นพนักงานจริง<br>เมื่ออนุมัติแล้วคุณจะเข้าใช้งานได้ทันที</p></div>
+    <div class="row center"><button class="btn link" onclick="leaveJoin('${approverOf(joinCid)?.id || ''}')">(สาธิต) เปิดเป็นตัวแทนบริษัทเพื่ออนุมัติ</button></div></div>`;
+  return `<div class="join"><img class="ph-logo" src="img/logo.png" alt="Guru IT Solution" width="96" height="28">
+    <h1>สมัครใช้งาน</h1><p class="hint" style="margin:2px 0 0">${esc(c.name)}</p>
+    <button type="button" class="join-photo" onclick="$('joinFile').click()"><i>${joinDraft.photo && PHOTOS[joinDraft.photo] ? `<img src="${PHOTOS[joinDraft.photo]}" alt="รูปของคุณ">` : ic('camera', 28, 1.7)}</i>${joinDraft.photo ? 'เปลี่ยนรูป' : 'รูปของคุณ (ไม่บังคับ)'}</button>
+    <input type="file" id="joinFile" accept="image/*" hidden onchange="joinPhoto(this)">
+    <label class="fl">ชื่อ-นามสกุล <em>*</em><input id="jName" maxlength="80" autocomplete="name" value="${esc(joinDraft.name)}" oninput="joinDraft.name=this.value"></label>
+    <label class="fl">เบอร์โทร <em>*</em><input id="jPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="15" placeholder="เช่น 081-234-5678" value="${esc(joinDraft.phone)}" oninput="joinDraft.phone=this.value"></label>
+    ${c.sites.length > 1 ? `<label class="fl">ทำงานที่ <em>*</em><select id="jSite">${c.sites.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select></label>` : ''}
+    <div class="err" id="jErr" role="alert"></div>
+    <button class="btn primary block" style="margin-top:18px" onclick="submitJoin()">ส่งคำขอ</button>
+    <p class="hint" style="text-align:center;margin-top:12px">ตัวแทนบริษัทจะยืนยันว่าคุณเป็นพนักงานจริง ก่อนเข้าใช้งาน</p></div>`;
+}
+async function joinPhoto(input) {
+  const f = input.files[0]; input.value = '';
+  if (!f) return;
+  try { const id = await compressPhoto(f); if (joinDraft.photo) dropPhoto(joinDraft.photo); joinDraft.photo = id; renderAll(); }
+  catch { toast('เปิดไฟล์รูปนี้ไม่ได้'); }
+}
+function submitJoin() {
+  const c = customers[joinCid], name = $('jName').value.trim(), phone = $('jPhone').value.replace(/[\s-]/g, '');
+  const siteId = c.sites.some(s => s.id === $('jSite')?.value) ? $('jSite').value : c.sites[0]?.id;
+  const taken = joinRequests.some(r => r.customer === joinCid && r.phone === phone && r.status !== 'rejected')
+    || Object.values(users).some(u => u.customer === joinCid && u.phone === phone);
+  const err = !name ? 'กรุณากรอกชื่อ' : !validPhone(phone) ? 'เบอร์โทรไม่ถูกต้อง (เช่น 0812345678)' : taken ? 'เบอร์นี้ส่งคำขอแล้วหรือเป็นสมาชิกอยู่แล้ว' : '';
+  if (err) { $('jErr').textContent = err; return; }
+  joinRequests.push({ id: `J${nextJoinNo++}`, customer: joinCid, siteId, name, phone, photo: joinDraft.photo, at: new Date(), status: 'pending' });
+  joinDone = true; renderAll();
+}
+function leaveJoin(uid) {
+  joinCid = null; joinDone = false; joinDraft = { name: '', phone: '', photo: null };
+  history.replaceState(null, '', location.pathname);
+  if (users[uid]) switchUser(uid); else renderAll();
+}
+const pendingJoins = u => canApproveMembers(u, u.customer) ? joinRequests.filter(r => r.customer === u.customer && r.status === 'pending') : [];
+const joinRow = r => `<div class="trow jrow"><span class="javatar">${r.photo && PHOTOS[r.photo] ? `<img src="${PHOTOS[r.photo]}" alt="">` : ic('user', 20, 1.8)}</span>
+  <div class="tr-m"><b>${esc(r.name)}</b><small><a href="tel:${esc(r.phone)}">${esc(r.phone)}</a> · ${esc(customers[r.customer].sites.find(s => s.id === r.siteId)?.name || '-')} · ${ago(r.at)}</small></div>
+  <button class="btn soft sm" onclick="decideJoin('${r.id}',true)">ยอมรับ</button>${ibtn('x', `ปฏิเสธ ${esc(r.name)}`, `decideJoin('${r.id}',false)`)}</div>`;
+function decideJoin(id, ok) {
+  const r = joinRequests.find(x => x.id === id), u = currentUser;
+  if (!r || r.status !== 'pending' || !canApproveMembers(u, r.customer)) return;
+  r.status = ok ? 'approved' : 'rejected'; r.by = u.id; r.decidedAt = new Date();
+  if (ok) { const nid = `m${nextUserNo++}`; users[nid] = { id: nid, name: r.name, role: 'customer', customer: r.customer, siteId: r.siteId, phone: r.phone, photo: r.photo }; }
+  logAudit(u, `${ok ? 'อนุมัติ' : 'ปฏิเสธ'}สมาชิกใหม่`, `${r.name} · ${custName(r.customer)}`);
+  toast(ok ? `${r.name} เข้าใช้งานได้แล้ว` : 'ปฏิเสธคำขอแล้ว'); renderAll();
+}
+function openInvite() {
+  const url = `${location.origin}${location.pathname}?join=${currentUser.customer}`;
+  openModal(`<div class="mh"><h3>ชวนพนักงานเข้าใช้งาน</h3>${xbtn()}</div>
+    <p class="hint" style="margin:0 0 12px">ส่งลิงก์นี้ให้พนักงาน (เช่นทาง LINE) — เมื่อมีคนสมัคร คำขอจะขึ้นที่หน้าหลักของคุณให้กดยอมรับ</p>
+    <input id="invUrl" readonly value="${esc(url)}" onfocus="this.select()" aria-label="ลิงก์สมัคร">
+    <button class="btn primary block" onclick="shareInvite()">${ic(navigator.share ? 'send' : 'doc', 18, 2)}${navigator.share ? 'แชร์ลิงก์' : 'คัดลอกลิงก์'}</button>
+    <div class="row center"><a class="btn link" href="${esc(url)}">(สาธิต) ลองเปิดลิงก์สมัคร</a></div>`);
+}
+async function shareInvite() {
+  const url = $('invUrl').value;
+  try {
+    if (navigator.share) await navigator.share({ title: 'สมัครใช้งาน Guru IT Service Desk', url });
+    else { await navigator.clipboard.writeText(url); toast('คัดลอกลิงก์แล้ว — ส่งให้พนักงานได้เลย'); }
+  } catch (e) { if (e.name !== 'AbortError') { $('invUrl').focus(); toast('กดค้างที่ลิงก์ด้านบนเพื่อคัดลอก'); } }
+}
+
 /* ---------- หน้า "ฉัน": โปรไฟล์ · โหมดสี · ตั้งค่า ---------- */
 function renderMe() {
   const u = currentUser;
@@ -517,6 +591,7 @@ function renderMe() {
     <div class="theme-pick" role="radiogroup" aria-label="โหมดสี">${THEMES.map(([k, l, i]) => `<button role="radio" aria-checked="${theme === k}" class="${theme === k ? 'on' : ''}" onclick="setTheme('${k}')"><span class="sw sw-${k}">${ic(i, 20, 1.8)}</span>${l}</button>`).join('')}</div>
     <button class="srow" onclick="setDense(${!dense})"><i>${ic(dense ? 'rows' : 'cards', 20, 1.8)}</i><span>มุมมองรายการ<small>${dense ? 'แบบย่อ — แถวเดียว' : 'แบบเต็ม — แสดงรายละเอียด'}</small></span><span class="switch ${dense ? 'on' : ''}" aria-hidden="true"></span></button>
   </div>
+  ${canApproveMembers(u, u.customer) ? `<div class="sgroup"><h4>บริษัทของฉัน</h4>${row('team', 'ชวนพนักงานเข้าใช้งาน', 'openInvite()', 'ส่งลิงก์สมัคร — คุณเป็นผู้อนุมัติ')}</div>` : ''}
   ${isManager(u) ? `<div class="sgroup"><h4>จัดการ</h4>
     ${canManageUsers(u) ? row('team', 'ผู้ใช้และสิทธิ์', "goTab('users')") : ''}
     ${canSeeMissions(u) ? row('pin', 'ติดตามช่างภาคสนาม', "goTab('mission')") : ''}
@@ -858,7 +933,7 @@ function openCreateCustomer(mode) {
     ${voiceBox('fDesc', 'rows="4" placeholder="เช่น เครื่องพิมพ์ชั้น 2 พิมพ์ไม่ออก" oninput="draft.desc=this.value" aria-label="ปัญหาที่พบ"', draft.desc)}
     <div class="tools big">${voiceBtn('fDesc', 'พูดแทนพิมพ์')}${photoBtn('create', 'ถ่าย / แนบรูป')}</div>
     ${thumbsBox('create')}
-    ${sites.length > 1 ? `<label class="fl">ที่ไหน?<select id="fSite" onchange="draft.site=this.value">${sites.map(s => `<option value="${s.id}" ${draft.site === s.id ? 'selected' : ''}>${esc(s.name)}</option>`).join('')}</select></label>` : ''}
+    ${sites.length > 1 ? `<label class="fl">ที่ไหน?<select id="fSite" onchange="draft.site=this.value">${sites.map(s => `<option value="${s.id}" ${(draft.site || u.siteId) === s.id ? 'selected' : ''}>${esc(s.name)}</option>`).join('')}</select></label>` : ''}
     <label class="urgent-toggle"><input type="checkbox" id="fUrgent" ${draft.urgent ? 'checked' : ''} onchange="draft.urgent=this.checked"><span><b>ด่วน</b><small>ใช้งานไม่ได้เลย / กระทบหลายคน</small></span></label>
     <div class="err" id="fErr" role="alert"></div>
     <button class="btn primary block" onclick="submitCreateCustomer()">${ic('send', 18, 2.2)}ส่งเรื่อง</button>`);
@@ -1267,6 +1342,8 @@ function auditRows(rows) {
 /* ---------- Render ---------- */
 function renderAll() {
   const u = currentUser;
+  $('tabbar').hidden = !!joinCid;
+  if (joinCid) { $('shell').className = 'shell joining'; $('fab').hidden = true; $('screen').innerHTML = `<div class="page">${renderJoin()}</div>`; return; }
   $('shell').className = `shell role-${u.role}`;
   renderTabbar();
   const home = { customer: homeCustomer, technician: homeTech, team_leader: homeLead, admin: homeAdmin }[u.role];
