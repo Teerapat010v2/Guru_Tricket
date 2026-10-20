@@ -688,8 +688,10 @@ function renderLogin() {
       <div class="err" id="lgErr" role="alert"></div>
       <button class="btn primary block" style="margin-top:12px" onclick="verifyOtp()">เข้าสู่ระบบ</button>`}
     <div class="divider">ยังไม่มีบัญชี?</div>
-    <p class="hint" style="margin:6px 0 8px">เปิดลิงก์สมัครที่ได้จากตัวแทนบริษัท หรือใส่รหัสบริษัท</p>
-    <div class="cbox"><input id="lgCompany" placeholder="รหัสบริษัท" maxlength="10" aria-label="รหัสบริษัท" onkeydown="if(event.key==='Enter')startJoin()"><button class="btn" onclick="startJoin()">สมัคร</button></div>
+    <p class="hint" style="margin:6px 0 8px">เปิดลิงก์สมัครที่ได้จากตัวแทนบริษัท หรือค้นหาบริษัทของคุณ</p>
+    <div class="cbox"><input id="lgCompany" type="search" placeholder="รหัส หรือชื่อบริษัท" maxlength="60" aria-label="รหัส หรือชื่อบริษัท" autocomplete="organization"
+      oninput="showCompanyMatches()" onkeydown="if(event.key==='Enter')startJoin()"><button class="btn" onclick="startJoin()">สมัคร</button></div>
+    <div id="lgMatches" class="list dense" style="margin-top:8px" hidden></div>
     <details class="card demo-acc"><summary>${ic('swap', 18)} บัญชีทดลอง (สาธิต)</summary>
       ${accounts.map(x => `<button class="srow" onclick="switchUser('${x.id}')">${avatarHtml(x, 34)}<span>${esc(x.name)}<small>${ROLE_LABEL[x.role]}${x.customer ? ' · ' + esc(custName(x.customer)) : ''} · ${esc(x.phone || '')}</small></span>${ic('right', 16, 2)}</button>`).join('')}</details>
   </div>`;
@@ -705,10 +707,25 @@ function verifyOtp() {
   if (!u) { $('lgErr').textContent = 'ไม่พบบัญชีของเบอร์นี้ — สมัครด้วยลิงก์จากตัวแทนบริษัท หรือรอการอนุมัติ'; return; }
   login = { phone: '', step: 'phone' }; switchUser(u.id);
 }
+/* ค้นหาบริษัท: รหัสตรงตัว หรือชื่อ (ไม่สนช่องว่าง/คำว่า บริษัท จำกัด) — ชื่อต้องพิมพ์ ≥3 ตัว และแสดงไม่เกิน 5 ราย กันคนนอกไล่ดูรายชื่อลูกค้าทั้งหมด */
+const normName = s => String(s).toLowerCase().replace(/บริษัท|จำกัด|\(มหาชน\)|มหาชน|\s|\./g, '');
+function findCompanies(q) {
+  const id = String(q).trim().toUpperCase();
+  if (customers[id]) return [customers[id]];
+  const n = normName(q);
+  return n.length < 3 ? [] : Object.values(customers).filter(c => normName(c.name).includes(n)).slice(0, 5);
+}
+console.assert(findCompanies('c1')[0]?.id === 'C1' && findCompanies('เอบีซี')[0]?.id === 'C1' && findCompanies('บริษัท').length === 0 && findCompanies('xy').length === 0, 'findCompanies');
+function showCompanyMatches() {
+  const box = $('lgMatches'), q = $('lgCompany').value, found = findCompanies(q);
+  box.hidden = !q.trim();
+  box.innerHTML = found.length ? found.map(c => `<button class="trow" onclick="joinCid='${c.id}';renderAll()">${ic('building', 18, 1.8)}<div class="tr-m"><b>${esc(c.name)}</b><small>แตะเพื่อสมัครในนามบริษัทนี้</small></div>${ic('right', 16, 2)}</button>`).join('')
+    : `<div class="trow jrow"><div class="tr-m"><small>${normName(q).length < 3 ? 'พิมพ์รหัส หรือชื่อบริษัทอย่างน้อย 3 ตัวอักษร' : 'ไม่พบบริษัท — ตรวจชื่ออีกครั้ง หรือขอลิงก์จากตัวแทนบริษัท'}</small></div></div>`;
+}
 function startJoin() {
-  const c = $('lgCompany').value.trim().toUpperCase();
-  if (!customers[c]) { toast('ไม่พบรหัสบริษัทนี้ — ขอลิงก์จากตัวแทนบริษัท'); return; }
-  joinCid = c; renderAll();
+  const found = findCompanies($('lgCompany').value);
+  if (found.length === 1) { joinCid = found[0].id; renderAll(); return; }
+  showCompanyMatches();
 }
 
 /* ---------- ทีมช่าง: โปรไฟล์ · ความถนัด · เพิ่ม/ลบ (หัวหน้า/แอดมิน) ---------- */
