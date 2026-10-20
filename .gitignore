@@ -1,0 +1,5 @@
+# ค่าส่วนตัวของ Claude Code ในเครื่องนี้
+.claude/settings.local.json
+# ไฟล์ระบบ Windows
+Thumbs.db
+desktop.ini

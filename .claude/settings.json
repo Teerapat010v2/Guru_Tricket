@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/tools/autosave.sh\"",
+            "timeout": 30,
+            "statusMessage": "กำลังบันทึกการแก้ไขลงประวัติ…"
+          }
+        ]
+      }
+    ]
+  }
+}
