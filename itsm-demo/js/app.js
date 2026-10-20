@@ -605,6 +605,7 @@ function pushSheet(v) {
   sheetStack.push(v); renderSheet();
   $('sheet').classList.add('open'); $('sheet').setAttribute('aria-hidden', 'false'); $('sheetBg').classList.add('on');
   $('sheet').querySelector('.sheet-body').scrollTo(0, 0);
+  $('sheet').querySelector('.sheet-bar .ibtn')?.focus({ preventScroll: true });
   syncHistory();
 }
 function openTicket(id) {
@@ -1023,12 +1024,20 @@ function addWorklog(id) {
 }
 
 /* ---------- Modal ---------- */
+let modalReturn = null;
 function openModal(html) {
   stopVoice();
+  if (!$('modal').classList.contains('open')) modalReturn = document.activeElement;
   $('modalCard').innerHTML = html; $('modal').classList.add('open'); $('modal').setAttribute('aria-hidden', 'false'); $('modalCard').scrollTop = 0;
+  $('modalCard').setAttribute('aria-label', $('modalCard').querySelector('h3')?.textContent || 'หน้าต่าง');
+  /* ย้ายโฟกัสเข้าหน้าต่างให้ผู้ใช้คีย์บอร์ด/โปรแกรมอ่านจอ — ใช้ปุ่มปิด เพื่อไม่ให้คีย์บอร์ดมือถือเด้ง */
+  ($('modalCard').querySelector('.xbtn') || $('modalCard').querySelector('button'))?.focus({ preventScroll: true });
   syncHistory();
 }
-function closeModal() { stopVoice(); $('modal').classList.remove('open'); $('modal').setAttribute('aria-hidden', 'true'); syncHistory(); }
+function closeModal() {
+  stopVoice(); $('modal').classList.remove('open'); $('modal').setAttribute('aria-hidden', 'true'); syncHistory();
+  if (modalReturn?.isConnected) modalReturn.focus({ preventScroll: true }); modalReturn = null;
+}
 /* โฟกัสช่องแรกเฉพาะบนคอมพิวเตอร์ — บนมือถือไม่เด้งคีย์บอร์ดบังฟอร์ม */
 function focusLater(id) { if (matchMedia('(pointer:fine)').matches) setTimeout(() => $(id)?.focus(), 60); }
 
